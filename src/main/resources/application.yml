@@ -1,0 +1,14 @@
+server:
+    address: localhost
+    port: 8080
+logging:
+    level:
+        org.springframework.web:INFO
+
+spring:
+    h2:
+        console:
+            enabled: true
+    datasource:
+        name: crudextia
+        url: jdbc:h2:./target/crud-extia
