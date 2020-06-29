@@ -1,7 +1,15 @@
 package com.extia.crudExtia.bo;
 
+import lombok.*;
+
 import java.util.Objects;
 
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
 public class User {
 
     private String name;
@@ -11,12 +19,6 @@ public class User {
     private Long id;
 
 
-    public User() {}
-    public User(String name, String surname, Long id) {
-        this.name = name;
-        this.surname = surname;
-        this.id = id;
-    }
 
     @Override
     public String toString() {
@@ -41,27 +43,4 @@ public class User {
         return Objects.hash(id);
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }
