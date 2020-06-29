@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.flywaydb.flyway-test-extensions:flyway-spring-test:unknown">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/flywaydb/flyway-test-extensions/flyway-spring-test/unknown/flyway-spring-test-unknown.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/flywaydb/flyway-test-extensions/flyway-spring-test/unknown/flyway-spring-test-unknown-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/flywaydb/flyway-test-extensions/flyway-spring-test/unknown/flyway-spring-test-unknown-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
