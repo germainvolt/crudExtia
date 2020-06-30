@@ -57,7 +57,7 @@ public class UserControllerTest {
 
         mock = MockMvcBuilders.webAppContextSetup(web).build();
         user = User.builder()
-                .id(1L).name("name").surname("surname")
+                .id(1L).name("name").lastname("surname")
                 .build();
         users.add(user);
 

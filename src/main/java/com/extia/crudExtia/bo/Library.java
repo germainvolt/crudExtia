@@ -2,6 +2,8 @@ package com.extia.crudExtia.bo;
 
 import lombok.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -19,5 +21,9 @@ public class Library {
     @Setter
     @Getter
     private String name;
+
+    @Setter
+    @Getter
+    private List<Item> items;
 
 }

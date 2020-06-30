@@ -2,6 +2,7 @@ package com.extia.crudExtia.bo;
 
 import lombok.*;
 
+import java.util.List;
 import java.util.Objects;
 
 
@@ -14,17 +15,18 @@ public class User {
 
     private String name;
 
-    private String surname;
+    private String lastname;
 
     private Long id;
 
+    private List<Library> libraries;
 
 
     @Override
     public String toString() {
         return "User{" +
                 "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
+                ", surname='" + lastname + '\'' +
                 ", id=" + id +
                 '}';
     }

@@ -3,11 +3,13 @@ package com.extia.crudExtia.controller;
 import com.extia.crudExtia.bo.User;
 import com.extia.crudExtia.services.UserService;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping(value="/user")
 public class UserController {
@@ -44,7 +46,7 @@ public class UserController {
                     response = User.class)
     @RequestMapping(value="/{id}",method=RequestMethod.GET)
     public User getUser(@PathVariable("id") Long id){
-
+        log.debug("looking for user ",id);
         return userService.getUser(id);
     }
 
