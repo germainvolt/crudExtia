@@ -1,4 +1,4 @@
-package com.extia.crudExtia.bo;
+package com.extia.crudExtia.models;
 
 import com.extia.crudExtia.enums.E_TypeItem;
 import lombok.*;

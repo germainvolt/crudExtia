@@ -1,6 +1,7 @@
 package com.extia.crudExtia.controller;
 
-import com.extia.crudExtia.bo.User;
+import com.extia.crudExtia.exceptions.ResourceNotFoundException;
+import com.extia.crudExtia.models.User;
 import com.extia.crudExtia.services.UserService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -34,8 +35,10 @@ public class UserController {
                     httpMethod = "GET",
                     response = User.class)
     @RequestMapping(value="/search",method=RequestMethod.POST)
-    public List<User> findUsers(@RequestBody User search){
-
+    public List<User> findUsers(@RequestBody User search) throws Exception {
+        if(search==null){
+            throw new Exception("Search can't be null");
+        }
         return userService.findUsers(search);
     }
 
@@ -45,8 +48,11 @@ public class UserController {
                     httpMethod = "GET",
                     response = User.class)
     @RequestMapping(value="/{id}",method=RequestMethod.GET)
-    public User getUser(@PathVariable("id") Long id){
-        log.debug("looking for user ",id);
+    public User getUser(@PathVariable("id") Long id) throws Exception {
+        log.error("looking for user ",id);
+        if(id==null){
+            throw new Exception("Id can't be null");
+        }
         return userService.getUser(id);
     }
 
