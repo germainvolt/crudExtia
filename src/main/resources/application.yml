@@ -3,7 +3,7 @@ server:
     port: 8080
 logging:
     level:
-        org.springframework.web:INFO
+        org.springframework.web: DEBUG
 
 spring:
     h2:
