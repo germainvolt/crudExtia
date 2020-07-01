@@ -71,13 +71,8 @@ public class UserDaoImpl implements UserDao {
         StringBuilder query = new StringBuilder(requestFindUser);
         HashMap<String, Object> params = newHashMap();
 
-        if(search.getId()!=null){
-            query.append(" ").append(whereId);
-            params.put(ID_USER,search.getId());
-        }
-
         if(StringUtils.isNotBlank(search.getName())){
-            if(search.getLastname().contains("%")){
+            if(search.getName().contains("%")){
                 query.append(" ").append(whereLikeName);
                 params.put(NAME_USER,search.getName());
             }else{

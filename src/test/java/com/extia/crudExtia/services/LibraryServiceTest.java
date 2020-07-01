@@ -2,6 +2,7 @@ package com.extia.crudExtia.services;
 
 
 import com.extia.crudExtia.dao.LibraryDaoImpl;
+import com.extia.crudExtia.exceptions.ResourceNotFoundException;
 import com.extia.crudExtia.models.Library;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,7 +43,7 @@ class LibraryServiceTest {
     }
 
     @Test
-    void should_get_Library_by_id() {
+    void should_get_Library_by_id() throws ResourceNotFoundException {
         Library lib = Library.builder().libraryId(5L).name("library").userId(1L).build();
         when(libraryDao.getLibrary(5L)).thenReturn(lib);
         Library res = libraryService.getLibrary(5L);
@@ -51,7 +52,7 @@ class LibraryServiceTest {
         assertThat(res.getLibraryId()).isEqualTo(5L);
     }
     @Test
-    void should_not_get_Library_by_id() {
+    void should_not_get_Library_by_id() throws ResourceNotFoundException {
         when(libraryDao.getLibrary(1L)).thenReturn(null);
         Library res = libraryService.getLibrary(1L);
 
@@ -59,7 +60,7 @@ class LibraryServiceTest {
     }
 
     @Test
-    void findLibraries() {
+    void findLibraries() throws ResourceNotFoundException {
         Library lib = Library.builder().libraryId(5L).name("library").userId(1L).build();
         List<Library> libraries = new ArrayList<>();
         libraries.add(lib);

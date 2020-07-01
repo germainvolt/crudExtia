@@ -2,20 +2,21 @@ package com.extia.crudExtia.dao;
 
 import com.extia.crudExtia.exceptions.ResourceNotFoundException;
 import com.extia.crudExtia.models.Library;
+import com.extia.crudExtia.models.User;
 import com.google.common.collect.ImmutableMap;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import static com.google.common.collect.Maps.newHashMap;
 
@@ -27,22 +28,23 @@ public class LibraryDaoImpl implements LibraryDao {
     private static final String ID_LIBRARY ="libraryId";
     private static final String ID_USER ="userid";
     private static final String NAME_LIBRARY ="nameLibrary";
-    private static final String LASTNAME_USER ="lastnameUser";
 
 
     @Autowired
     NamedParameterJdbcTemplate jdbcTemplate;
 
-    @Value("${user.find}")
+    @Value("${library.find}")
     private String requestFindLibrary;
-    @Value("${user.where.id.clause}")
+    @Value("${library.where.id.clause}")
     private String whereId;
-    @Value("${user.where.user.clause}")
+    @Value("${library.where.user.clause}")
     private String whereUserId;
-    @Value("${user.where.name.clause}")
+    @Value("${library.where.name.clause}")
     private String whereName;
-    @Value("${user.where.like.name.clause}")
+    @Value("${library.where.like.name.clause}")
     private String whereLikeName;
+    @Value("${library.where.user.in.clause}")
+    private String whereUserIdIn;
 
     @Override
     public List<Library> getAllLibraries() {
@@ -90,6 +92,45 @@ public class LibraryDaoImpl implements LibraryDao {
         }
 
         return libraries;
+    }
+
+    @Override
+    public Map<Long, List<Library>> getLibraryByUsers(List<User> users){
+        StringBuilder query  = new StringBuilder(requestFindLibrary).append(" ").append(whereUserIdIn).append("( :userid )");
+        List<Long> ids= users.stream().map(User::getId).collect(Collectors.toList());
+        List<Library> libraries = new ArrayList<>();
+        boolean done = false;
+        int max = 1000;
+        while(!done) {
+            if (ids.size() <= 1000) {
+                max =ids.size();
+                done =true;
+            }
+            List<Long> idList = ids.subList(0, max);
+            libraries.addAll( jdbcTemplate.query(query.toString(),ImmutableMap.of(ID_USER, idList),getLibraryRowMapper()));
+            if(!done){
+                ids = ids.subList(max,ids.size());
+            }
+        }
+
+        Map<Long, List<Library>> result = new HashMap<>();
+        if(!CollectionUtils.isEmpty(libraries)) {
+            for(Library library : libraries){
+                if(result.get(library.getUserId()) == null) {
+                    result.put(library.getUserId(), toArray(library));
+                }else{
+                    result.get(library.getUserId()).add(library);
+                }
+            }
+        }
+        return result;
+
+    }
+
+    private List<Library> toArray(Library library) {
+        List<Library> list =new ArrayList<>();
+        list.add(library);
+        return  list;
     }
 
     private RowMapper<Library> getLibraryRowMapper() {
