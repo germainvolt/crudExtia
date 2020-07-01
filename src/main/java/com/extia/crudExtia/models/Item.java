@@ -6,14 +6,35 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Setter
 @Getter
 @EqualsAndHashCode(of = {"itemId","libraryId"})
 public class Item {
+    @Setter
     private Long itemId;
+    @Setter
     private Long libraryId;
 
+    @Setter
     private String name;
+    @Setter
     private String author;
-    private E_TypeItem type;
+    private String type;
+
+    public void setType(E_TypeItem type){
+        this.type=type.toString();
+    }
+    public void setType(String type){
+        this.type=E_TypeItem.getByValue(type)==null?null:type;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "itemId=" + itemId +
+                ", libraryId=" + libraryId +
+                ", name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }

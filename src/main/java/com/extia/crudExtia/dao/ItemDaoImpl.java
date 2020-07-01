@@ -68,7 +68,7 @@ public class ItemDaoImpl implements ItemDao {
                 .libraryId(rs.getLong("FK_LIBRARY_ID"))
                 .name(rs.getString("ITEM_NAME"))
                 .author(rs.getString("ITEM_AUTHOR"))
-                .type(E_TypeItem.valueOf(rs.getString("ITEM_TYPE"))).build();
+                .type(rs.getString("ITEM_TYPE")).build();
     }
 
     @Override
@@ -96,9 +96,9 @@ public class ItemDaoImpl implements ItemDao {
             query.append(" ").append(wherelibraryId);
             params.put(ID_LIBRARY,search.getLibraryId());
         }
-        if(search.getType()!=null){
+        if(StringUtils.isNotBlank(search.getType())){
             query.append(" ").append(whereType);
-            params.put(TYPE,search.getLibraryId());
+            params.put(TYPE,search.getType());
         }
         if(StringUtils.isNotBlank(search.getName())){
             if(search.getName().contains("%")) {
@@ -121,6 +121,7 @@ public class ItemDaoImpl implements ItemDao {
             log.error("Items not found",query.toString(),params);
             throw new ResourceNotFoundException("Items not found");
         }
+
         return items;
     }
 

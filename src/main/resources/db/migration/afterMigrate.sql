@@ -116,7 +116,7 @@ insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (6, '3', 'Jenk
 insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (7, '23', 'Pannaman');
 insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (8, '8', 'Butterwick');
 insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (9, '33', 'Brusin');
-insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (10, '7', 'O''Connor');
+insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (10, '7', 'OConnor');
 insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (11, '7', 'Powderham');
 insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (12, '14', 'Ogger');
 insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (13, '20', 'Boffin');
@@ -130,7 +130,7 @@ insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (20, '20', 'Fe
 insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (21, '10', 'Zoren');
 insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (22, '14', 'MacFie');
 insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (23, '32', 'Baswall');
-insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (24, '', 'Hindrick');
+insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (24, '2', 'Hindrick');
 insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (25, '21', 'Dorin');
 insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (26, '19', 'Shackle');
 insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (27, '3', 'Woodcock');
@@ -148,7 +148,7 @@ insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (38, '32', 'Ko
 insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (39, '29', 'Zammitt');
 insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (40, '9', 'Boater');
 insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (41, '31', 'Geffe');
-insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (42, '', 'Shildrick');
+insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (42, '2', 'Shildrick');
 insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (43, '17', 'Vequaud');
 insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (44, '10', 'Coping');
 insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (45, '25', 'Rosenfarb');
@@ -174,7 +174,7 @@ insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (64, '4', 'Swa
 insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (65, '7', 'Maciaszczyk');
 insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (66, '10', 'Howat');
 insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (67, '19', 'Mintoft');
-insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (68, '22', 'O''Scollee');
+insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (68, '22', 'OScollee');
 insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (69, '23', 'Cherrett');
 insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (70, '16', 'Alvares');
 insert into LIBRARY (LIBRARY_ID, FK_USER_ID, LIBRARY_NAME) values (71, '20', 'Foan');
