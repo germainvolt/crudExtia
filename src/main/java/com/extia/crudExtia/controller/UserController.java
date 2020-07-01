@@ -23,7 +23,7 @@ public class UserController {
                     notes = "Return a list of User",
                     httpMethod = "GET",
                     response = User.class)
-    @RequestMapping(value="/all", method=RequestMethod.GET)
+    @RequestMapping(value="/all", method=RequestMethod.GET, produces = "application/json")
     public List<User> getAllUsers(){
 
         return userService.getAllUsers();
@@ -34,7 +34,7 @@ public class UserController {
                     notes = "Return a list of User",
                     httpMethod = "GET",
                     response = User.class)
-    @RequestMapping(value="/search",method=RequestMethod.POST)
+    @RequestMapping(value="/search",method=RequestMethod.POST, produces = "application/json")
     public List<User> findUsers(@RequestBody User search) throws Exception {
         if(search==null){
             throw new Exception("Search can't be null");
@@ -47,7 +47,7 @@ public class UserController {
                     notes = "Return one User from their id",
                     httpMethod = "GET",
                     response = User.class)
-    @RequestMapping(value="/{id}",method=RequestMethod.GET)
+    @RequestMapping(value="/{id}",method=RequestMethod.GET, produces = "application/json")
     public User getUser(@PathVariable("id") Long id) throws Exception {
         log.error("looking for user ",id);
         if(id==null){

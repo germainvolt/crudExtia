@@ -45,11 +45,15 @@ user.where.like.lastname.clause*/
     private String whereName;
     @Value("${user.where.lastname.clause}")
     private String whereLastName;
+    @Value("${user.where.like.name.clause}")
+    private String whereLikeName;
+    @Value("${user.where.like.lastname.clause}")
+    private String whereLikeLastName;
 
     @Override
     public List<User> getAllUsers() {
         List<User> users =jdbcTemplate.query(requestFindUser, getUserRowMapper());
-        return null;
+        return users;
     }
 
     private RowMapper<User> getUserRowMapper() {
@@ -70,8 +74,8 @@ user.where.like.lastname.clause*/
             throw new ResourceNotFoundException("user not found");
         }
         log.error("user found",query.toString(),id);
-        System.out.println(id+ " user found "+query.toString() );
-        return null;
+        System.out.println(id+ " user found "+query.toString() +"\n"+users.get(0));
+        return users.get(0);
     }
 
     @Override
@@ -81,13 +85,24 @@ user.where.like.lastname.clause*/
         HashMap<String, Object> params = newHashMap();
 
         if(StringUtils.isNotBlank(search.getName())){
-            query.append(" ").append(whereName);
-            params.put(NAME_USER,search.getName());
+            if(search.getLastname().contains("%")){
+                query.append(" ").append(whereLikeName);
+                params.put(NAME_USER,search.getName());
+            }else{
+                query.append(" ").append(whereName);
+                params.put(NAME_USER,search.getName());
+            }
+
 
         }
         if(StringUtils.isNotBlank(search.getLastname())){
-            query.append(" ").append(whereLastName);
-            params.put(LASTNAME_USER,search.getLastname());
+            if(search.getLastname().contains("%")){
+                query.append(" ").append(whereLikeLastName);
+                params.put(LASTNAME_USER,search.getLastname());
+            }else{
+                query.append(" ").append(whereLastName);
+                params.put(LASTNAME_USER,search.getLastname());
+            }
 
         }
         List<User> users =jdbcTemplate.query(query.toString(), params,getUserRowMapper());
