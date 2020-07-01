@@ -2,7 +2,6 @@ package com.extia.crudExtia.dao;
 
 import com.extia.crudExtia.exceptions.ResourceNotFoundException;
 import com.extia.crudExtia.models.Library;
-import com.extia.crudExtia.models.User;
 import com.google.common.collect.ImmutableMap;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -15,8 +14,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
 import java.util.*;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 import static com.google.common.collect.Maps.newHashMap;
 
@@ -57,8 +54,8 @@ public class LibraryDaoImpl implements LibraryDao {
         StringBuilder query = new StringBuilder(requestFindLibrary).append(" ").append(whereId);
         List<Library> libraries = jdbcTemplate.query(query.toString(),ImmutableMap.of(ID_LIBRARY, id),getLibraryRowMapper());
         if(CollectionUtils.isEmpty(libraries)){
-            log.error("user not found",query.toString(),id);
-            throw new ResourceNotFoundException("user not found");
+            log.error("Library not found",query.toString(),id);
+            throw new ResourceNotFoundException("Library not found");
         }
         return libraries.get(0);
     }
@@ -95,9 +92,8 @@ public class LibraryDaoImpl implements LibraryDao {
     }
 
     @Override
-    public Map<Long, List<Library>> getLibraryByUsers(List<User> users){
+    public List<Library> getLibraryByUsers(List<Long> ids){
         StringBuilder query  = new StringBuilder(requestFindLibrary).append(" ").append(whereUserIdIn).append("( :userid )");
-        List<Long> ids= users.stream().map(User::getId).collect(Collectors.toList());
         List<Library> libraries = new ArrayList<>();
         boolean done = false;
         int max = 1000;
@@ -113,25 +109,10 @@ public class LibraryDaoImpl implements LibraryDao {
             }
         }
 
-        Map<Long, List<Library>> result = new HashMap<>();
-        if(!CollectionUtils.isEmpty(libraries)) {
-            for(Library library : libraries){
-                if(result.get(library.getUserId()) == null) {
-                    result.put(library.getUserId(), toArray(library));
-                }else{
-                    result.get(library.getUserId()).add(library);
-                }
-            }
-        }
-        return result;
+        return libraries;
 
     }
 
-    private List<Library> toArray(Library library) {
-        List<Library> list =new ArrayList<>();
-        list.add(library);
-        return  list;
-    }
 
     private RowMapper<Library> getLibraryRowMapper() {
         return (rs, rowNum) -> Library.builder().libraryId(rs.getLong("library_id"))

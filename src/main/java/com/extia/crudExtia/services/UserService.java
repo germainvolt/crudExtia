@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 @Service
 public class UserService {
@@ -20,29 +23,37 @@ public class UserService {
     @Autowired
     LibraryDao libraryDao;
 
+    @Autowired
+    LibraryService libraryService;
+
     private User user;
 
     public List<User> getAllUsers() {
         List<User> users=  userDao.getAllUsers();
-        Map<Long, List<Library>> libraryByUsers = libraryDao.getLibraryByUsers(users);
-
-        users.stream().forEach(user -> user.setLibraries(libraryByUsers.get(user.getId())));
+        linkLibrariesToUser(users);
         return users;
     }
 
     public User getUser(Long id) throws ResourceNotFoundException {
 
         user = userDao.getUser(id);
-        user.setLibraries(libraryDao.findLibraries(Library.builder().userId(user.getId()).build()));
+
+        Map<Long, List<Library>> libraryByUsers = libraryService.getLibraryByUsers(newArrayList(user.getId()));
+        user.setLibraries(libraryByUsers.get(user.getId()));
         return user;
     }
 
     public List<User> findUsers(User search) throws ResourceNotFoundException {
         List<User> users = userDao.findUsers(search);
-        Map<Long, List<Library>> libraryByUsers = libraryDao.getLibraryByUsers(users);
-
-        users.stream().forEach(user -> user.setLibraries(libraryByUsers.get(user.getId())));
+        linkLibrariesToUser(users);
 
         return users;
+    }
+
+    private void linkLibrariesToUser(List<User> users) {
+        List<Long> ids= users.stream().map(User::getId).collect(Collectors.toList());
+        Map<Long, List<Library>> libraryByUsers = libraryService.getLibraryByUsers(ids);
+
+        users.stream().forEach(user -> user.setLibraries(libraryByUsers.get(user.getId())));
     }
 }

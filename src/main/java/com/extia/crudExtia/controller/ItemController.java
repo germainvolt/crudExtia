@@ -1,7 +1,7 @@
 package com.extia.crudExtia.controller;
 
-import com.extia.crudExtia.models.Library;
-import com.extia.crudExtia.services.LibraryService;
+import com.extia.crudExtia.models.Item;
+import com.extia.crudExtia.services.ItemService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,53 +11,51 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping(value="/libraries")
-public class LibraryController {
+@RequestMapping(value="/items")
+public class ItemController {
 
     @Autowired
-    LibraryService libraryService;
-
-
+    ItemService itemService;
 
     @ApiOperation
             (value = "Get all libraries",
                     notes = "Return a list of libraries",
                     httpMethod = "GET",
-                    response = Library.class,
+                    response = Item.class,
                     responseContainer = "List")
     @RequestMapping(value="/all", method= RequestMethod.GET, produces = "application/json")
-    public List<Library> getAllLibraries(){
-
-        return libraryService.getAllLibraries();
+    public List<Item> getAllItems(){
+        return itemService.getAllItem();
     }
+
     @ApiOperation
-            (value = "Get one library by its id",
-                    notes = "Return a library",
+            (value = "Get all libraries",
+                    notes = "Return a list of libraries",
                     httpMethod = "GET",
-                    response = Library.class)
+                    response = Item.class)
     @RequestMapping(value="/{id}", method= RequestMethod.GET, produces = "application/json")
-    public Library getLibrary(@PathVariable("id") Long id) throws Exception {
+    public Item getItem(@PathVariable("id") Long id) throws Exception {
         if(id==null){
             throw new Exception("Id can't be null");
         }
-        return libraryService.getLibrary(id);
+        return itemService.getItem(id);
 
     }
 
     @ApiOperation
-            (value = "Search libraries",
+            (value = "Get all libraries",
                     notes = "Return a list of libraries",
-                    httpMethod = "GET",
-                    response = Library.class,
+                    httpMethod = "POST",
+                    response = Item.class,
                     responseContainer = "List")
-    @RequestMapping(value="/search",method=RequestMethod.POST, produces = "application/json")
-    public  List<Library> findLibraries(@RequestBody Library search) throws Exception {
+    @RequestMapping(value="/search", method= RequestMethod.POST, produces = "application/json")
+    public List<Item> findItem(@RequestBody Item search) throws Exception {
         if(search==null){
             throw new Exception("search item can't be null");
         }
-        return libraryService.findLibraries(search);
-    }
+        return itemService.searchItem(search);
 
+    }
 
 
 }

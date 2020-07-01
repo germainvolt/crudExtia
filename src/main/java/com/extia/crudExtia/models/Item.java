@@ -14,9 +14,6 @@ public class Item {
     private Long libraryId;
 
     private String name;
-    private String artist;
-    private String resume;
-    private String rate;
+    private String author;
     private E_TypeItem type;
-    private Integer quantity;
 }
