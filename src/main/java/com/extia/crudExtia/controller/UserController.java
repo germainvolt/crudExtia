@@ -1,6 +1,6 @@
 package com.extia.crudExtia.controller;
 
-import com.extia.crudExtia.exceptions.ResourceNotFoundException;
+
 import com.extia.crudExtia.models.User;
 import com.extia.crudExtia.services.UserService;
 import io.swagger.annotations.ApiOperation;
@@ -22,7 +22,8 @@ public class UserController {
             (value = "Get all users",
                     notes = "Return a list of User",
                     httpMethod = "GET",
-                    response = User.class)
+                    response = User.class,
+                    responseContainer = "List")
     @RequestMapping(value="/all", method=RequestMethod.GET, produces = "application/json")
     public List<User> getAllUsers(){
 
@@ -31,9 +32,10 @@ public class UserController {
 
     @ApiOperation
             (value = "Get all users",
-                    notes = "Return a list of User",
-                    httpMethod = "GET",
-                    response = User.class)
+                    notes = "Return a list of User corresponding to the search,, place '%' at the beginning or at the end of the field to search on part of the names",
+                    httpMethod = "POST",
+                    response = User.class,
+                    responseContainer = "List")
     @RequestMapping(value="/search",method=RequestMethod.POST, produces = "application/json")
     public List<User> findUsers(@RequestBody User search) throws Exception {
         if(search==null){

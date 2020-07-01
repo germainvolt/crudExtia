@@ -1,4 +1,4 @@
-package com.extia.crudExtia.controller;
+package com.extia.crudExtia;
 
 import com.extia.crudExtia.CrudExtiaApplication;
 import org.junit.Test;

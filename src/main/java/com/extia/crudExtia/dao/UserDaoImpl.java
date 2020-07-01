@@ -30,12 +30,6 @@ public class UserDaoImpl implements UserDao {
 
     @Autowired
     NamedParameterJdbcTemplate jdbcTemplate;
-    /*user.find = SELECT id, name, lastname FROM USER 1=1
-user.where.id.clause = AND id = :idUser
-user.where.name.clause = AND name = :nameUser
-user.where.lastname.clause = AND lastname = :lastnameUser
-user.where.like.name.clause = AND name like :nameUser
-user.where.like.lastname.clause*/
 
     @Value("${user.find}")
     private String requestFindUser;
@@ -54,13 +48,6 @@ user.where.like.lastname.clause*/
     public List<User> getAllUsers() {
         List<User> users =jdbcTemplate.query(requestFindUser, getUserRowMapper());
         return users;
-    }
-
-    private RowMapper<User> getUserRowMapper() {
-        return (rs, rowNum) -> User.builder().id(rs.getLong("id"))
-                .name(rs.getString("name"))
-                .lastname(rs.getString("lastname"))
-                .build();
     }
 
     @Override
@@ -83,6 +70,11 @@ user.where.like.lastname.clause*/
 
         StringBuilder query = new StringBuilder(requestFindUser);
         HashMap<String, Object> params = newHashMap();
+
+        if(search.getId()!=null){
+            query.append(" ").append(whereId);
+            params.put(ID_USER,search.getId());
+        }
 
         if(StringUtils.isNotBlank(search.getName())){
             if(search.getLastname().contains("%")){
@@ -113,4 +105,13 @@ user.where.like.lastname.clause*/
         log.error("user found",query.toString(),params);
         return users;
     }
+
+
+    private RowMapper<User> getUserRowMapper() {
+        return (rs, rowNum) -> User.builder().id(rs.getLong("id"))
+                .name(rs.getString("name"))
+                .lastname(rs.getString("lastname"))
+                .build();
+    }
+
 }

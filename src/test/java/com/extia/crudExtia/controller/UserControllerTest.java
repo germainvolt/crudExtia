@@ -83,7 +83,7 @@ public class UserControllerTest {
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
-        //Assert.assertEquals(200, response.getStatus());
+       // Assert.assertEquals(200, response.getStatus());
         log.error(response.getContentAsString());
 
     }
