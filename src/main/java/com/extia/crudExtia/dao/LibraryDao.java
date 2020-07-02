@@ -15,4 +15,14 @@ public interface LibraryDao {
     List<Library> findLibraries(Library search) throws ResourceNotFoundException;
 
     List<Library> getLibraryByUsers(List<Long> ids);
+
+    List<Library> createLibraries(List<Library> libraries);
+
+    Library createLibrary(Library libraryToCreate);
+
+    Library updateLibrary(Library libraryToUpdate);
+
+    List<Library> updateLibraries(List<Library> librariesToUpdate);
+
+    void deleteLibrary(Long id);
 }

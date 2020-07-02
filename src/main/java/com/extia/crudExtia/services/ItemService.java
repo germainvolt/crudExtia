@@ -82,7 +82,6 @@ public class ItemService {
 
     public List<Item> updateOrCreateItems( List<Item> itemsToEdit){
         List<Item> result = new ArrayList<>();
-        List<Long> ids= itemsToEdit.stream().map(Item::getItemId).collect(Collectors.toList());
         List<Item> itemsToCreate = itemsToEdit.stream().filter(item -> item.getItemId()==null)
                 .collect(Collectors.toList());
         result.addAll(itemDao.createItems(itemsToCreate));

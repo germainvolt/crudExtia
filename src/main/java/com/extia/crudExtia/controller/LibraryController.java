@@ -47,7 +47,7 @@ public class LibraryController {
     @ApiOperation
             (value = "Search libraries",
                     notes = "Return a list of libraries",
-                    httpMethod = "GET",
+                    httpMethod = "POST",
                     response = Library.class,
                     responseContainer = "List")
     @RequestMapping(value="/search",method=RequestMethod.POST, produces = "application/json")
@@ -58,6 +58,47 @@ public class LibraryController {
         return libraryService.findLibraries(search);
     }
 
+    @ApiOperation
+            (value = "Create a library",
+                    notes = "Return new library with ID",
+                    httpMethod = "POST",
+                    response = Library.class)
+    @RequestMapping(method=RequestMethod.POST, produces = "application/json")
+    public  Library createLibrary(@RequestBody Library libraryToCreate) throws Exception {
+        if(libraryToCreate==null){
+            throw new Exception("new library can't be null");
+        }
+        return libraryService.createLibrary(libraryToCreate);
+    }
+
+    @ApiOperation
+            (value = "update a library",
+                    notes = "Return updated library ",
+                    httpMethod = "PUT",
+                    response = Library.class)
+    @RequestMapping(method=RequestMethod.PUT, produces = "application/json")
+    public  Library updateLibrary(@PathVariable("id") Long id,@RequestBody Library libraryToUpdate) throws Exception {
+        if(libraryToUpdate==null){
+            throw new Exception("new library can't be null");
+        }
+        if(id!=libraryToUpdate.getLibraryId()){
+            throw new Exception("Ids don't match");
+        }
+        return libraryService.updateLibrary(libraryToUpdate);
+    }
 
 
+    @ApiOperation
+            (value = "update a library",
+                    notes = "Return updated library ",
+                    httpMethod = "DELETE",
+                    response = Library.class)
+    @RequestMapping(value="/{id}",method=RequestMethod.DELETE)
+    public void deleteLibrary(@PathVariable("id") Long id) throws Exception {
+        if(id==null){
+            throw new Exception("Id can't be null");
+        }
+        libraryService.deleteLibrary(id);
+
+    }
 }

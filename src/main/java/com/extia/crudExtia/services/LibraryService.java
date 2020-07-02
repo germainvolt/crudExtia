@@ -80,4 +80,42 @@ public class LibraryService {
         Map<Long, List<Item>> itemsMap = itemService.getItemByLibraries(ids);
         libraries.stream().forEach(library -> library.setItems(itemsMap.get(library.getLibraryId())));
     }
+
+    public Library createLibrary(Library libraryToCreate) {
+        libraryToCreate= libraryDao.createLibrary(libraryToCreate);
+        List<Item> items = itemService.updateOrCreateItems(libraryToCreate.getItems());
+        libraryToCreate.setItems(items);
+        return libraryToCreate;
+    }
+
+    public List<Library> createOrUpdateLibraries(List<Library> libraries){
+        List<Library>librariesToCreate = libraries.stream().filter(library -> library.getLibraryId()==null)
+                .collect(Collectors.toList());
+        List<Library>librariesToUpdate = libraries.stream().filter(library -> library.getLibraryId()!=null)
+                .collect(Collectors.toList());
+        libraries= libraryDao.createLibraries(librariesToCreate);
+        libraries.addAll(libraryDao.updateLibraries(librariesToUpdate));
+
+        libraries.forEach(library ->{
+            library.getItems().forEach(item -> item.setLibraryId(library.getLibraryId()));
+            library.setItems(itemService.updateOrCreateItems(library.getItems()));
+        } );
+
+        return libraries;
+    }
+
+    public Library updateLibrary(Library libraryToUpdate) {
+        Library updated = libraryDao.updateLibrary(libraryToUpdate);
+        updated.getItems().forEach(item -> item.setLibraryId(updated.getLibraryId()));
+        updated.setItems(itemService.updateOrCreateItems(libraryToUpdate.getItems()));
+        return null;
+    }
+
+    public void deleteLibrary(Long id) throws ResourceNotFoundException {
+        Library libraryToDelete = getLibrary(id);
+        libraryToDelete.getItems().forEach(item -> itemService.deleteItem(item.getItemId()));
+        libraryToDelete.setItems(null);
+        libraryDao.deleteLibrary(id);
+
+    }
 }

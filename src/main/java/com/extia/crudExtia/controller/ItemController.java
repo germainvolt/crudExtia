@@ -94,13 +94,12 @@ public class ItemController {
                     httpMethod = "DELETE",
                     response = String.class)
     @RequestMapping(value="/{id}", method= RequestMethod.DELETE, produces = "application/json")
-    public String deleteItem(@PathVariable("id") Long id) throws Exception {
+    public void deleteItem(@PathVariable("id") Long id) throws Exception {
         if(id==null){
             throw new Exception("Id can't be null");
         }
 
         itemService.deleteItem(id);
-        return "Item with ID:"+id+" has been deleted from Database";
 
     }
 }

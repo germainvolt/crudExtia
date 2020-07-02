@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
@@ -32,6 +35,13 @@ public class LibraryDaoImpl implements LibraryDao {
 
     @Value("${library.find}")
     private String requestFindLibrary;
+    @Value("${library.create}")
+    private String requestCreateLibrary;
+    @Value("${library.update}")
+    private String requestUpdateLibrary;
+    @Value("${library.delete}")
+    private String requestDeleteLibrary;
+
     @Value("${library.where.id.clause}")
     private String whereId;
     @Value("${library.where.user.clause}")
@@ -110,6 +120,48 @@ public class LibraryDaoImpl implements LibraryDao {
         }
 
         return libraries;
+
+    }
+
+    @Override
+    public List<Library> createLibraries(List<Library> libraries){
+        libraries.forEach(library -> createLibrary(library));
+        return libraries;
+    }
+
+    @Override
+    public Library createLibrary(Library libraryToCreate) {
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(requestCreateLibrary, new MapSqlParameterSource()
+                .addValue(NAME_LIBRARY,libraryToCreate.getName())
+                .addValue(ID_USER,libraryToCreate.getUserId()) ,
+                keyHolder
+        );
+        libraryToCreate.setLibraryId(keyHolder.getKey().longValue());
+        return libraryToCreate;
+    }
+
+    @Override
+    public Library updateLibrary(Library libraryToUpdate) {
+        jdbcTemplate.update(requestUpdateLibrary, new MapSqlParameterSource()
+                .addValue(NAME_LIBRARY,libraryToUpdate.getName())
+                .addValue(ID_USER,libraryToUpdate.getUserId())
+                .addValue(ID_LIBRARY, libraryToUpdate.getLibraryId())
+        );
+        return null;
+    }
+
+    @Override
+    public List<Library> updateLibraries(List<Library> librariesToUpdate) {
+        librariesToUpdate.forEach(library -> updateLibrary(library));
+        return librariesToUpdate;
+    }
+
+    @Override
+    public void deleteLibrary(Long id) {
+
+        jdbcTemplate.update(requestDeleteLibrary, new MapSqlParameterSource().addValue(ID_LIBRARY, id));
 
     }
 
