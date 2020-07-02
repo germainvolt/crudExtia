@@ -76,7 +76,7 @@ public class LibraryController {
                     notes = "Return updated library ",
                     httpMethod = "PUT",
                     response = Library.class)
-    @RequestMapping(method=RequestMethod.PUT, produces = "application/json")
+    @RequestMapping(value = "/{id}", method=RequestMethod.PUT, produces = "application/json")
     public  Library updateLibrary(@PathVariable("id") Long id,@RequestBody Library libraryToUpdate) throws Exception {
         if(libraryToUpdate==null){
             throw new Exception("new library can't be null");

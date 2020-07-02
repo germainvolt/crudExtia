@@ -149,13 +149,7 @@ public class LibraryDaoImpl implements LibraryDao {
                 .addValue(ID_USER,libraryToUpdate.getUserId())
                 .addValue(ID_LIBRARY, libraryToUpdate.getLibraryId())
         );
-        return null;
-    }
-
-    @Override
-    public List<Library> updateLibraries(List<Library> librariesToUpdate) {
-        librariesToUpdate.forEach(library -> updateLibrary(library));
-        return librariesToUpdate;
+        return libraryToUpdate;
     }
 
     @Override

@@ -19,9 +19,6 @@ public interface ItemDao {
 
     Item updateItem(Item itemToEdit);
 
-    List<Item> createItems(List<Item> itemsToCreate);
-
-    List<Item> updateItems(List<Item> itemsToUpdate);
 
     void deleteItem(Long id);
 }

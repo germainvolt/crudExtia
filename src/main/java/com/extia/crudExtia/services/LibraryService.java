@@ -49,7 +49,7 @@ public class LibraryService {
     }
 
 
-    public Map<Long,List<Library>> getLibraryByUsers(List<Long> ids) {
+    public Map<Long,List<Library>> getMapLibrariesByUserIds(List<Long> ids) {
 
         List<Library> libraries = libraryDao.getLibraryByUsers(ids);
         linkItemsToLibraries(libraries);
@@ -81,41 +81,53 @@ public class LibraryService {
         libraries.stream().forEach(library -> library.setItems(itemsMap.get(library.getLibraryId())));
     }
 
-    public Library createLibrary(Library libraryToCreate) {
-        libraryToCreate= libraryDao.createLibrary(libraryToCreate);
-        List<Item> items = itemService.updateOrCreateItems(libraryToCreate.getItems());
-        libraryToCreate.setItems(items);
-        return libraryToCreate;
-    }
+    public List<Library> createOrUpdateLibraries(List<Library> libraries) throws ResourceNotFoundException {
 
-    public List<Library> createOrUpdateLibraries(List<Library> libraries){
-        List<Library>librariesToCreate = libraries.stream().filter(library -> library.getLibraryId()==null)
-                .collect(Collectors.toList());
-        List<Library>librariesToUpdate = libraries.stream().filter(library -> library.getLibraryId()!=null)
-                .collect(Collectors.toList());
-        libraries= libraryDao.createLibraries(librariesToCreate);
-        libraries.addAll(libraryDao.updateLibraries(librariesToUpdate));
+        libraries.stream()
+                .filter(library -> library.getLibraryId()==null)
+                .forEach(library -> createLibrary(library));
 
-        libraries.forEach(library ->{
-            library.getItems().forEach(item -> item.setLibraryId(library.getLibraryId()));
-            library.setItems(itemService.updateOrCreateItems(library.getItems()));
-        } );
-
+        for(Library library: libraries.stream().filter(library -> library.getLibraryId() != null).collect(Collectors.toList())){
+            updateLibrary(library);
+        }
         return libraries;
     }
 
-    public Library updateLibrary(Library libraryToUpdate) {
-        Library updated = libraryDao.updateLibrary(libraryToUpdate);
-        updated.getItems().forEach(item -> item.setLibraryId(updated.getLibraryId()));
-        updated.setItems(itemService.updateOrCreateItems(libraryToUpdate.getItems()));
-        return null;
+
+    public Library createLibrary(Library libraryToCreate) {
+        libraryToCreate= libraryDao.createLibrary(libraryToCreate);
+        final long id= libraryToCreate.getLibraryId();
+
+        libraryToCreate.getItems().forEach(item -> item.setLibraryId(id));
+        List<Item> items = itemService.updateOrCreateItems(libraryToCreate.getItems());
+
+        libraryToCreate.setItems(items);
+
+        return libraryToCreate;
+    }
+
+    public Library updateLibrary(Library libraryToUpdate) throws ResourceNotFoundException {
+        Long libraryId = libraryToUpdate.getLibraryId();
+        List<Item> items = getLibrary(libraryId).getItems();
+        List<Long> ids= libraryToUpdate.getItems().stream().map(Item::getItemId).collect(Collectors.toList());
+
+        items.stream().filter(item -> !ids.contains(item.getItemId())).forEach(item -> itemService.deleteItem(item));
+
+        libraryToUpdate = libraryDao.updateLibrary(libraryToUpdate);
+        libraryToUpdate.getItems().forEach(item -> item.setLibraryId(libraryId));
+        libraryToUpdate.setItems(itemService.updateOrCreateItems(libraryToUpdate.getItems()));
+        return libraryToUpdate;
     }
 
     public void deleteLibrary(Long id) throws ResourceNotFoundException {
         Library libraryToDelete = getLibrary(id);
-        libraryToDelete.getItems().forEach(item -> itemService.deleteItem(item.getItemId()));
-        libraryToDelete.setItems(null);
-        libraryDao.deleteLibrary(id);
+        deleteLibrary(libraryToDelete);
 
+    }
+
+    public void deleteLibrary(Library libraryToDelete) {
+        libraryToDelete.getItems().forEach(item -> itemService.deleteItem(item));
+        libraryToDelete.setItems(null);
+        libraryDao.deleteLibrary(libraryToDelete.getLibraryId());
     }
 }

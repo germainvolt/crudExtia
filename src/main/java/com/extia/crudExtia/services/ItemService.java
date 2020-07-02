@@ -81,15 +81,13 @@ public class ItemService {
     }
 
     public List<Item> updateOrCreateItems( List<Item> itemsToEdit){
-        List<Item> result = new ArrayList<>();
-        List<Item> itemsToCreate = itemsToEdit.stream().filter(item -> item.getItemId()==null)
-                .collect(Collectors.toList());
-        result.addAll(itemDao.createItems(itemsToCreate));
-        List<Item> itemsToUpdate = itemsToEdit.stream().filter(item -> item.getItemId()!=null)
-                .collect(Collectors.toList());
-        result.addAll(itemDao.updateItems(itemsToUpdate));
+        itemsToEdit.stream().filter(item -> item.getItemId()==null).forEach(
+                item ->  itemDao.createItem(item));
 
-        return result;
+        itemsToEdit.stream().filter(item -> item.getItemId()!=null)
+                .forEach(item -> updateItem(item));
+
+        return itemsToEdit;
 
     }
 
@@ -97,7 +95,13 @@ public class ItemService {
         return itemDao.updateItem(itemToEdit);
     }
 
-    public void deleteItem(Long id) {
+    public void deleteItem(Long id) throws ResourceNotFoundException {
+        getItem(id);
         itemDao.deleteItem(id);
+    }
+
+    public void deleteItem(Item item) {
+        itemDao.deleteItem(item.getItemId());
+
     }
 }

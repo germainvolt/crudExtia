@@ -1,6 +1,5 @@
 package com.extia.crudExtia.services;
 
-import com.extia.crudExtia.dao.LibraryDao;
 import com.extia.crudExtia.exceptions.ResourceNotFoundException;
 import com.extia.crudExtia.models.Library;
 import com.extia.crudExtia.models.User;
@@ -21,12 +20,8 @@ public class UserService {
     UserDao userDao;
 
     @Autowired
-    LibraryDao libraryDao;
-
-    @Autowired
     LibraryService libraryService;
 
-    private User user;
 
     public List<User> getAllUsers() {
         List<User> users=  userDao.getAllUsers();
@@ -36,9 +31,9 @@ public class UserService {
 
     public User getUser(Long id) throws ResourceNotFoundException {
 
-        user = userDao.getUser(id);
+        User user = userDao.getUser(id);
 
-        Map<Long, List<Library>> libraryByUsers = libraryService.getLibraryByUsers(newArrayList(user.getId()));
+        Map<Long, List<Library>> libraryByUsers = libraryService.getMapLibrariesByUserIds(newArrayList(user.getId()));
         user.setLibraries(libraryByUsers.get(user.getId()));
         return user;
     }
@@ -52,8 +47,40 @@ public class UserService {
 
     private void linkLibrariesToUser(List<User> users) {
         List<Long> ids= users.stream().map(User::getId).collect(Collectors.toList());
-        Map<Long, List<Library>> libraryByUsers = libraryService.getLibraryByUsers(ids);
+        Map<Long, List<Library>> libraryByUsers = libraryService.getMapLibrariesByUserIds(ids);
 
         users.stream().forEach(user -> user.setLibraries(libraryByUsers.get(user.getId())));
+    }
+
+    public User UpdateUsers(User userToUpdate) throws ResourceNotFoundException {
+        Long userId = userToUpdate.getId();
+        List<Library> libraries = getUser(userToUpdate.getId()).getLibraries();
+        List<Long> ids= userToUpdate.getLibraries().stream().map(Library::getLibraryId).collect(Collectors.toList());
+
+        libraries.stream()
+                .filter(library -> !ids.contains(library.getLibraryId()))
+                .forEach(library -> libraryService.deleteLibrary(library));
+
+        libraries = libraryService.createOrUpdateLibraries(userToUpdate.getLibraries());
+        userToUpdate= userDao.updateUser(userToUpdate);
+        userToUpdate.setLibraries(libraries);
+        return userToUpdate;
+    }
+
+    public User createUsers(User userToCreate) {
+        User createdUser = userDao.createUser(userToCreate);
+        createdUser.getLibraries().forEach(library -> {
+            library.setUserId(createdUser.getId());
+            libraryService.createLibrary(library);
+        });
+        return createdUser;
+    }
+
+    public void deleteUser(Long id) throws ResourceNotFoundException {
+        User userToDelete=  getUser(id);
+        userToDelete.getLibraries().forEach(library -> libraryService.deleteLibrary(library));
+        userToDelete.setLibraries(null);
+        userDao.deleteUser(id);
+
     }
 }

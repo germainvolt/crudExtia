@@ -2,25 +2,33 @@ package com.extia.crudExtia.models;
 
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
 @Setter
 @Builder
 public class User {
 
+    @Getter
     private String name;
 
+    @Getter
     private String lastname;
 
+    @Getter
     private Long id;
 
     private List<Library> libraries;
 
+    public List<Library> getLibraries() {
+        if(libraries==null)
+            libraries= new ArrayList<>();
+        return libraries;
+    }
 
     @Override
     public String toString() {

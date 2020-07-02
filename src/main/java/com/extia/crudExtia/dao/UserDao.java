@@ -11,4 +11,10 @@ public interface UserDao {
     User getUser(Long id) throws ResourceNotFoundException;
 
     List<User> findUsers(User search) throws ResourceNotFoundException;
+
+    User createUser(User userToCreate);
+
+    User updateUser(User userToUpdate);
+
+    void deleteUser(Long id);
 }

@@ -2,6 +2,7 @@ package com.extia.crudExtia.models;
 
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -23,7 +24,12 @@ public class Library {
     private String name;
 
     @Setter
-    @Getter
     private List<Item> items;
+    public List<Item> getItems() {
+        if(items== null)
+            items= new ArrayList<>();
+        return items;
+    }
+
 
 }

@@ -168,18 +168,6 @@ public class ItemDaoImpl implements ItemDao {
     }
 
     @Override
-    public List<Item> createItems(List<Item> itemsToCreate) {
-        itemsToCreate.forEach(item -> createItem(item));
-        return itemsToCreate;
-    }
-
-    @Override
-    public List<Item> updateItems(List<Item> itemsToUpdate) {
-        itemsToUpdate.forEach(item -> updateItem(item));
-        return null;
-    }
-
-    @Override
     public void deleteItem(Long id) {
         jdbcTemplate.update(requestDeleteItem, new MapSqlParameterSource()
                 .addValue(ITEM_ID,id)

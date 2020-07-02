@@ -2,7 +2,6 @@ package com.extia.crudExtia.dao;
 
 import com.extia.crudExtia.exceptions.ResourceNotFoundException;
 import com.extia.crudExtia.models.User;
-import com.extia.crudExtia.dao.UserDao;
 import com.google.common.collect.ImmutableMap;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -10,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
@@ -33,6 +35,13 @@ public class UserDaoImpl implements UserDao {
 
     @Value("${user.find}")
     private String requestFindUser;
+    @Value("${user.insert}")
+    private String requestCreateUser;
+    @Value("${user.update}")
+    private String requestUpdateUser;
+    @Value("${user.delete}")
+    private String requestDeleteUser;
+
     @Value("${user.where.id.clause}")
     private String whereId;
     @Value("${user.where.name.clause}")
@@ -99,6 +108,36 @@ public class UserDaoImpl implements UserDao {
         }
         log.error("user found",query.toString(),params);
         return users;
+    }
+
+    @Override
+    public User createUser(User userToCreate) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(requestCreateUser, new MapSqlParameterSource()
+                .addValue(NAME_USER,userToCreate.getName())
+                .addValue(LASTNAME_USER,userToCreate.getLastname()) ,
+                keyHolder
+        );
+        userToCreate.setId(keyHolder.getKey().longValue());
+        return userToCreate;
+    }
+
+    @Override
+    public User updateUser(User userToUpdate) {
+        jdbcTemplate.update(requestUpdateUser, new MapSqlParameterSource()
+                        .addValue(NAME_USER,userToUpdate.getName())
+                        .addValue(LASTNAME_USER,userToUpdate.getLastname())
+                        .addValue(ID_USER,userToUpdate.getId())
+        );
+        return userToUpdate;
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        jdbcTemplate.update(requestDeleteUser, new MapSqlParameterSource()
+                .addValue(ID_USER,id)
+        );
+
     }
 
 

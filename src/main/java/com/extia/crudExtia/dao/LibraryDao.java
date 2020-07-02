@@ -22,7 +22,5 @@ public interface LibraryDao {
 
     Library updateLibrary(Library libraryToUpdate);
 
-    List<Library> updateLibraries(List<Library> librariesToUpdate);
-
     void deleteLibrary(Long id);
 }
