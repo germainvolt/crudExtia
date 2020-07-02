@@ -12,4 +12,5 @@ spring:
             enabled: true
     datasource:
         name: crudextia
-        url: jdbc:h2:./target/crud-extia
+        url: jdbc:h2:./target/crud-extia-test
+debug: true

@@ -8,18 +8,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
-
-@ActiveProfiles({"test"})
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(PowerMockRunner.class)
 class LibraryServiceTest {
     @InjectMocks
     LibraryService libraryService;
@@ -29,7 +26,7 @@ class LibraryServiceTest {
 
 
     @Test
-    void Should_get_All_Libraries() {
+    public void Should_get_All_Libraries() {
         Library lib = Library.builder().libraryId(5L).name("library").userId(1L).build();
         List<Library> libraries = new ArrayList<>();
         libraries.add(lib);
@@ -43,7 +40,7 @@ class LibraryServiceTest {
     }
 
     @Test
-    void should_get_Library_by_id() throws ResourceNotFoundException {
+    public void should_get_Library_by_id() throws ResourceNotFoundException {
         Library lib = Library.builder().libraryId(5L).name("library").userId(1L).build();
         when(libraryDao.getLibrary(5L)).thenReturn(lib);
         Library res = libraryService.getLibrary(5L);
@@ -52,7 +49,7 @@ class LibraryServiceTest {
         assertThat(res.getLibraryId()).isEqualTo(5L);
     }
     @Test
-    void should_not_get_Library_by_id() throws ResourceNotFoundException {
+    public void should_not_get_Library_by_id() throws ResourceNotFoundException {
         when(libraryDao.getLibrary(1L)).thenReturn(null);
         Library res = libraryService.getLibrary(1L);
 
@@ -60,7 +57,7 @@ class LibraryServiceTest {
     }
 
     @Test
-    void findLibraries() throws ResourceNotFoundException {
+    public  void findLibraries() throws ResourceNotFoundException {
         Library lib = Library.builder().libraryId(5L).name("library").userId(1L).build();
         List<Library> libraries = new ArrayList<>();
         libraries.add(lib);
