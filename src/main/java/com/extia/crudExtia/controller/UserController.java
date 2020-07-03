@@ -75,7 +75,7 @@ public class UserController {
         if(id!=userToUpdate.getId()){
             throw new Exception("Ids doesn't match");
         }
-        return userService.UpdateUsers(userToUpdate);
+        return userService.updateUsers(userToUpdate);
     }
     @ApiOperation
             (value = "Create users",

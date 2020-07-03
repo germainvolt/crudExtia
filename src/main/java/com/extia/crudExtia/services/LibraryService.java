@@ -112,8 +112,10 @@ public class LibraryService {
         items.stream().filter(item -> !ids.contains(item.getItemId())).forEach(item -> itemService.deleteItem(item));
 
         libraryToUpdate = libraryDao.updateLibrary(libraryToUpdate);
-        libraryToUpdate.getItems().forEach(item -> item.setLibraryId(libraryId));
-        libraryToUpdate.setItems(itemService.updateOrCreateItems(libraryToUpdate.getItems()));
+        if(!CollectionUtils.isEmpty(libraryToUpdate.getItems())) {
+            libraryToUpdate.getItems().forEach(item -> item.setLibraryId(libraryId));
+            libraryToUpdate.setItems(itemService.updateOrCreateItems(libraryToUpdate.getItems()));
+        }
         return libraryToUpdate;
     }
 

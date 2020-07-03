@@ -19,9 +19,9 @@ import java.util.Map;
 import static com.google.common.collect.Lists.newArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyList;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 class UserServiceTest {
@@ -47,6 +47,7 @@ class UserServiceTest {
         libraryService = mock(LibraryService.class);
         userService = new UserService();
         MockitoAnnotations.initMocks( this );
+
         library = Library.builder().libraryId(2L).name("library").userId(1L).build();
         libraries = newArrayList(library);
         user =User.builder().id(1L).name("name").lastname("lastname").build();
@@ -105,14 +106,70 @@ class UserServiceTest {
     }
 
     @Test
-    void updateUsers() {
+    void updateUsers() throws ResourceNotFoundException{
+        User userUp = User.builder().id(1L).lastname("new lastname").name("new name").build();
+        when(userDao.updateUser(any(User.class))).thenReturn(userUp);
+        when(libraryService.createOrUpdateLibraries(anyList())).thenReturn(null);
+        when(userDao.getUser(1L)).thenReturn(user);
+
+        User userTest = userService.updateUsers(userUp);
+        assertNotNull(userTest);
+        verify(userDao,times(1)).updateUser(any(User.class));
+        verify(libraryService,times(0)).deleteLibrary(any(Library.class));
+        verify(libraryService,times(1)).createOrUpdateLibraries(anyList());
+
+    }
+    @Test
+    void updateUsersWithLibraryToDelete() throws ResourceNotFoundException{
+        User userUp = User.builder().id(1L).lastname("new lastname").name("new name")
+                .libraries(newArrayList(Library.builder().userId(1L).libraryId(5L).name("library").build()))
+                .build();
+        when(userDao.updateUser(any(User.class))).thenReturn(user);
+        when(libraryService.getLibrariesByUserId(1L)).thenReturn(newArrayList(Library.builder().userId(1L).libraryId(5L).name("library").build()));
+        when(libraryService.createOrUpdateLibraries(anyList())).thenReturn(null);
+        when(userDao.getUser(1L)).thenReturn(userUp);
+
+        User userTest = userService.updateUsers(user);
+        assertNotNull(userTest);
+        verify(userDao,times(1)).updateUser(any(User.class));
+        verify(libraryService,times(1)).deleteLibrary(any(Library.class));
+        verify(libraryService,times(1)).createOrUpdateLibraries(anyList());
+
     }
 
     @Test
     void createUsers() {
+        Library library = Library.builder().userId(1L).libraryId(5L).name("library").build();
+        User userUp = User.builder().id(1L).lastname("new lastname").name("new name")
+                .libraries(newArrayList(library))
+                .build();
+        when(libraryService.createLibrary(library)).thenReturn(library);
+        when(userDao.createUser(userUp)).thenReturn(userUp);
+        userService.createUsers(userUp);
+
+        verify(libraryService,times(1)).createLibrary(any());
+
+
     }
 
     @Test
-    void deleteUser() {
+    void createUsersNoLibrary() {
+        Library library = Library.builder().userId(1L).libraryId(5L).name("library").build();
+        User userUp = User.builder().id(1L).lastname("new lastname").name("new name")
+                .build();
+        when(userDao.createUser(userUp)).thenReturn(userUp);
+        userService.createUsers(userUp);
+
+        verify(libraryService,times(0)).createLibrary(any());
+
+
+    }
+
+    @Test
+    void deleteUser() throws ResourceNotFoundException {
+        when(userDao.getUser(1L)).thenReturn(user);
+        userService.deleteUser(1L);
+
+        verify(userDao,times(1)).deleteUser(1L);
     }
 }

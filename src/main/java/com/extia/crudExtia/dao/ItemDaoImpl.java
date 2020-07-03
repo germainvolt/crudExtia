@@ -85,12 +85,13 @@ public class ItemDaoImpl implements ItemDao {
     }
 
     @Override
-    public Item getItem(Long id) {
+    public Item getItem(Long id) throws ResourceNotFoundException {
         StringBuilder query = new StringBuilder(requestFindItem).append(" ").append(whereId);
         List<Item> items = jdbcTemplate.query(query.toString(),
                             ImmutableMap.of(ITEM_ID, id), getItemRowMapper());
         if(CollectionUtils.isEmpty(items)){
-            return null;
+            log.error("Items not found",id);
+            throw new ResourceNotFoundException("Items not found");
         }
         return items.get(0);
     }

@@ -6,12 +6,12 @@ import com.extia.crudExtia.models.User;
 import com.extia.crudExtia.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static com.google.common.collect.Lists.newArrayList;
 
 @Service
 public class UserService {
@@ -51,15 +51,17 @@ public class UserService {
         users.stream().forEach(user -> user.setLibraries(libraryByUsers.get(user.getId())));
     }
 
-    public User UpdateUsers(User userToUpdate) throws ResourceNotFoundException {
+    public User updateUsers(User userToUpdate) throws ResourceNotFoundException {
         Long userId = userToUpdate.getId();
         List<Library> libraries = getUser(userToUpdate.getId()).getLibraries();
-        List<Long> ids= userToUpdate.getLibraries().stream().map(Library::getLibraryId).collect(Collectors.toList());
+        if(!CollectionUtils.isEmpty(libraries)) {
+            List<Long> ids = userToUpdate.getLibraries().stream().map(Library::getLibraryId).collect(Collectors.toList());
 
-        libraries.stream()
-                .filter(library -> !ids.contains(library.getLibraryId()))
-                .forEach(library -> libraryService.deleteLibrary(library));
+            libraries.stream()
+                    .filter(library -> !ids.contains(library.getLibraryId()))
+                    .forEach(library -> libraryService.deleteLibrary(library));
 
+        }
         libraries = libraryService.createOrUpdateLibraries(userToUpdate.getLibraries());
         userToUpdate= userDao.updateUser(userToUpdate);
         userToUpdate.setLibraries(libraries);
