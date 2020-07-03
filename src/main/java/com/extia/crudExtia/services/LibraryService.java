@@ -47,7 +47,7 @@ public class LibraryService {
     }
 
 
-    public List<Library> getMapLibrariesByUserId(Long id) {
+    public List<Library> getLibrariesByUserId(Long id) {
 
         List<Library> libraries = libraryDao.getLibraryByUsers(newArrayList(id));
         linkItemsToLibraries(libraries);
@@ -63,19 +63,13 @@ public class LibraryService {
         if(!CollectionUtils.isEmpty(libraries)) {
             for(Library library : libraries){
                 if(result.get(library.getUserId()) == null) {
-                    result.put(library.getUserId(), toArray(library));
+                    result.put(library.getUserId(), newArrayList(library));
                 }else{
                     result.get(library.getUserId()).add(library);
                 }
             }
         }
         return result;
-    }
-
-    private List<Library> toArray(Library library) {
-        List<Library> list =new ArrayList<>();
-        list.add(library);
-        return  list;
     }
 
     private void linkItemsToLibraries(List<Library> libraries) {

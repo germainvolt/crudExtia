@@ -32,7 +32,7 @@ public class UserService {
     public User getUser(Long id) throws ResourceNotFoundException {
 
         User user = userDao.getUser(id);
-        List<Library> libraries =libraryService.getMapLibrariesByUserId(id);
+        List<Library> libraries =libraryService.getLibrariesByUserId(id);
         user.setLibraries(libraries);
         return user;
     }

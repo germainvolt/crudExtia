@@ -114,6 +114,6 @@ public class UserController {
         if(id==null){
             throw new Exception("Id can't be null");
         }
-        return libraryService.getMapLibrariesByUserId(id);
+        return libraryService.getLibrariesByUserId(id);
     }
 }
