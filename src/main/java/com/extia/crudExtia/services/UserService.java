@@ -32,9 +32,8 @@ public class UserService {
     public User getUser(Long id) throws ResourceNotFoundException {
 
         User user = userDao.getUser(id);
-
-        Map<Long, List<Library>> libraryByUsers = libraryService.getMapLibrariesByUserIds(newArrayList(user.getId()));
-        user.setLibraries(libraryByUsers.get(user.getId()));
+        List<Library> libraries =libraryService.getMapLibrariesByUserId(id);
+        user.setLibraries(libraries);
         return user;
     }
 

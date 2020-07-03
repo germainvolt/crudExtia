@@ -1,6 +1,8 @@
 package com.extia.crudExtia.controller;
 
+import com.extia.crudExtia.models.Item;
 import com.extia.crudExtia.models.Library;
+import com.extia.crudExtia.services.ItemService;
 import com.extia.crudExtia.services.LibraryService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +18,8 @@ public class LibraryController {
 
     @Autowired
     LibraryService libraryService;
-
-
+    @Autowired
+    ItemService itemService;
 
     @ApiOperation
             (value = "Get all libraries",
@@ -99,6 +101,21 @@ public class LibraryController {
             throw new Exception("Id can't be null");
         }
         libraryService.deleteLibrary(id);
+
+    }
+
+    @ApiOperation
+            (value = "Get the library's items",
+                    notes = "Return items",
+                    httpMethod = "GET",
+                    response = Item.class,
+                    responseContainer = "List")
+    @RequestMapping(value="/{id}/items", method= RequestMethod.GET, produces = "application/json")
+    public List<Item> getLibraryItems(@PathVariable("id") Long id) throws Exception {
+        if(id==null){
+            throw new Exception("Id can't be null");
+        }
+        return itemService.getItemsByLibrary(id);
 
     }
 }

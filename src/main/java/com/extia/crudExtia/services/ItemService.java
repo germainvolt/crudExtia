@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 @Slf4j
 @Service
 public class ItemService {
@@ -41,6 +43,10 @@ public class ItemService {
             throw new ResourceNotFoundException("Items not found");
         }
         return items;
+    }
+
+    public List<Item> getItemsByLibrary(Long libraryId){
+        return itemDao.getItemByLibraries(newArrayList(libraryId));
     }
 
     public Map<Long, List<Item>> getItemByLibraries(List<Long> libraryIds) {
@@ -102,6 +108,5 @@ public class ItemService {
 
     public void deleteItem(Item item) {
         itemDao.deleteItem(item.getItemId());
-
     }
 }

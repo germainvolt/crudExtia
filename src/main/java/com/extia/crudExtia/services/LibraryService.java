@@ -34,9 +34,7 @@ public class LibraryService {
 
     public Library getLibrary(Long id) throws ResourceNotFoundException {
         Library library = libraryDao.getLibrary(id);
-
-        Map<Long, List<Item>> itemsMap = itemService.getItemByLibraries(newArrayList(library.getLibraryId()));
-        library.setItems(itemsMap.get(library.getLibraryId()));
+        library.setItems(itemService.getItemsByLibrary(library.getLibraryId()));
         return library;
 
     }
@@ -49,6 +47,12 @@ public class LibraryService {
     }
 
 
+    public List<Library> getMapLibrariesByUserId(Long id) {
+
+        List<Library> libraries = libraryDao.getLibraryByUsers(newArrayList(id));
+        linkItemsToLibraries(libraries);
+        return libraries;
+    }
     public Map<Long,List<Library>> getMapLibrariesByUserIds(List<Long> ids) {
 
         List<Library> libraries = libraryDao.getLibraryByUsers(ids);

@@ -1,7 +1,9 @@
 package com.extia.crudExtia.controller;
 
 
+import com.extia.crudExtia.models.Library;
 import com.extia.crudExtia.models.User;
+import com.extia.crudExtia.services.LibraryService;
 import com.extia.crudExtia.services.UserService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -12,11 +14,14 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping(value="/user")
+@RequestMapping(value="/users")
 public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    LibraryService libraryService;
 
     @ApiOperation
             (value = "Get all users",
@@ -45,7 +50,7 @@ public class UserController {
     }
 
     @ApiOperation
-            (value = "Get one users",
+            (value = "Get one user",
                     notes = "Return one User from their id",
                     httpMethod = "GET",
                     response = User.class)
@@ -98,6 +103,17 @@ public class UserController {
         userService.deleteUser(id);
     }
 
-
-
+    @ApiOperation
+            (value = "Get user's libraries",
+                    notes = "Return a list of libraries ",
+                    httpMethod = "GET",
+                    response = Library.class,
+                    responseContainer = "List")
+    @RequestMapping(value="/{id}/libraries",method=RequestMethod.GET, produces = "application/json")
+    public List<Library> getUserLibraries(@PathVariable("id") Long id) throws Exception {
+        if(id==null){
+            throw new Exception("Id can't be null");
+        }
+        return libraryService.getMapLibrariesByUserId(id);
+    }
 }
