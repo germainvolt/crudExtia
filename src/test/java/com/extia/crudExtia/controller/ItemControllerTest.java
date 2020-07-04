@@ -5,12 +5,9 @@ import com.extia.crudExtia.exceptions.ResourceNotFoundException;
 import com.extia.crudExtia.models.Item;
 import com.extia.crudExtia.services.ItemService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -20,17 +17,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import springfox.documentation.spring.web.json.JsonSerializer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -41,9 +33,6 @@ class ItemControllerTest {
 
     @Autowired
     private MockMvc mvc;
-
-    @InjectMocks
-    ItemController itemController;
 
     @MockBean
     ItemService itemService;
@@ -65,7 +54,7 @@ class ItemControllerTest {
         Item item2 = Item.builder().itemId(7L).libraryId(5L).build();
         List<Item> items2 =new ArrayList<>();
         items2.add(item); items2.add(item2);
-        given(this.itemService.getAllItem()).willReturn(items2 );
+        given(itemService.getAllItem()).willReturn(items2 );
 
         mvc.perform( MockMvcRequestBuilders
                 .get("/items/all")

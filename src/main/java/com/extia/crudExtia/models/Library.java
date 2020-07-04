@@ -32,4 +32,13 @@ public class Library {
     }
 
 
+    @Override
+    public String toString() {
+        return "Library{" +
+                "libraryId=" + libraryId +
+                ", userId=" + userId +
+                ", name='" + name + '\'' +
+                ", items=" + items +
+                '}';
+    }
 }
