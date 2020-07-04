@@ -26,7 +26,8 @@ public class ItemController {
                     responseContainer = "List")
     @RequestMapping(value="/all", method= RequestMethod.GET, produces = "application/json")
     public List<Item> getAllItems(){
-        return itemService.getAllItem();
+        List<Item> allItem = itemService.getAllItem();
+        return allItem;
     }
 
     @ApiOperation

@@ -36,10 +36,10 @@ class UserServiceTest {
     @InjectMocks
     UserService userService;
 
-    Library library;
-    List<Library> libraries;
-    User user;
-    Map<Long, List<Library>> libraryByUsers = new HashMap<>();
+    private Library library;
+    private List<Library> libraries;
+    private User user;
+    private Map<Long, List<Library>> libraryByUsers = new HashMap<>();
 
     @BeforeEach
     public void init(){

@@ -29,8 +29,8 @@ class ItemServiceTest {
     @Mock
     ItemDao itemDao;
 
-    List<Item> items =new ArrayList<>();
-    Item item;
+    private List<Item> items =new ArrayList<>();
+    private Item item;
 
 
     @BeforeEach

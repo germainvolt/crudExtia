@@ -36,11 +36,11 @@ class LibraryServiceTest {
     @Mock
     ItemService itemService;
 
-    Library lib;
-    List<Library> libraries;
-    Map<Long, List<Item>> itemsMap;
-    Item item ;
-    User user;
+    private Library lib;
+    private List<Library> libraries;
+    private Map<Long, List<Item>> itemsMap;
+    private Item item ;
+    private User user;
 
     @BeforeEach
     public void init() throws ResourceNotFoundException {
