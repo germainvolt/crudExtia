@@ -124,12 +124,6 @@ public class LibraryDaoImpl implements LibraryDao {
     }
 
     @Override
-    public List<Library> createLibraries(List<Library> libraries){
-        libraries.forEach(library -> createLibrary(library));
-        return libraries;
-    }
-
-    @Override
     public Library createLibrary(Library libraryToCreate) {
 
         KeyHolder keyHolder = new GeneratedKeyHolder();

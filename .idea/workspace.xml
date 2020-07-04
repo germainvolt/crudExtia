@@ -5,15 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a3eea41-5cec-4010-b5c5-356d1330e6ce" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/extia/crudExtia/dao/ItemDaoImplTest.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/resources/db/migration/V1.0.0__init_database.sql" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/resources/db/migration/afterMigrate.sql" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/resources/db/sql/item.properties" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/resources/db/sql/library.properties" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/resources/db/sql/user.properties" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/extia/crudExtia/dao/LibraryDaoImplTest.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/extia/crudExtia/dao/ItemDaoImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/extia/crudExtia/dao/ItemDaoImpl.java" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/db.sql/user.properties" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/extia/crudExtia/dao/LibraryDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/extia/crudExtia/dao/LibraryDao.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/extia/crudExtia/dao/LibraryDaoImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/extia/crudExtia/dao/LibraryDaoImpl.java" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/extia/crudExtia/dao/ItemDaoImplTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/extia/crudExtia/dao/ItemDaoImplTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -25,52 +21,48 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.4617855">
+    <splitter split-orientation="horizontal" split-proportion="0.5510597">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="ItemDaoImplTest.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/test/java/com/extia/crudExtia/dao/ItemDaoImplTest.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1275">
-                  <caret line="75" column="34" lean-forward="false" selection-start-line="75" selection-start-column="34" selection-end-line="75" selection-end-column="34" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="afterMigrate.sql" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/test/resources/db/migration/afterMigrate.sql">
               <provider editor-type-id="OdpsQlGraph">
                 <state />
               </provider>
               <provider selected="true" editor-type-id="OdpsQlEditor">
+                <state relative-caret-position="493">
+                  <caret line="110" column="87" lean-forward="false" selection-start-line="110" selection-start-column="77" selection-end-line="110" selection-end-column="87" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="LibraryDaoImplTest.java" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/test/java/com/extia/crudExtia/dao/LibraryDaoImplTest.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="628">
+                  <caret line="121" column="35" lean-forward="false" selection-start-line="121" selection-start-column="35" selection-end-line="121" selection-end-column="35" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="LibraryDao.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/com/extia/crudExtia/dao/LibraryDao.java">
+              <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="238">
-                  <caret line="212" column="105" lean-forward="false" selection-start-line="212" selection-start-column="95" selection-end-line="212" selection-end-column="105" />
+                  <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="ItemDao.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/com/extia/crudExtia/dao/ItemDao.java">
+          <file leaf-file-name="LibraryControllerTest.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/test/java/com/extia/crudExtia/controller/LibraryControllerTest.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="170">
-                  <caret line="14" column="15" lean-forward="false" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
+                <state relative-caret-position="493">
+                  <caret line="57" column="3" lean-forward="false" selection-start-line="56" selection-start-column="18" selection-end-line="57" selection-end-column="3" />
                   <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="ItemControllerTest.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/test/java/com/extia/crudExtia/controller/ItemControllerTest.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="731">
-                  <caret line="106" column="23" lean-forward="false" selection-start-line="106" selection-start-column="23" selection-end-line="106" selection-end-column="36" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
                 </state>
               </provider>
             </entry>
@@ -79,12 +71,34 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="ItemDaoImpl.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="ItemDaoImpl.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/extia/crudExtia/dao/ItemDaoImpl.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="364">
                   <caret line="115" column="48" lean-forward="false" selection-start-line="115" selection-start-column="41" selection-end-line="115" selection-end-column="48" />
                   <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="LibraryDaoImpl.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/com/extia/crudExtia/dao/LibraryDaoImpl.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="544">
+                  <caret line="140" column="48" lean-forward="false" selection-start-line="140" selection-start-column="28" selection-end-line="140" selection-end-column="48" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ItemDaoImplTest.java" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/test/java/com/extia/crudExtia/dao/ItemDaoImplTest.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-1087">
+                  <caret line="25" column="6" lean-forward="false" selection-start-line="25" selection-start-column="6" selection-end-line="25" selection-end-column="6" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -142,7 +156,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/extia/crudExtia/CrudExtiaApplication.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/extia/crudExtia/bo/Item.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application.yml" />
         <option value="$PROJECT_DIR$/src/main/resources/db/migration/V1.0.0_init_database.sql" />
@@ -168,8 +181,6 @@
         <option value="$PROJECT_DIR$/src/main/resources/db/sql/library.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/extia/crudExtia/dao/UserDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/extia/crudExtia/dao/UserDaoImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/extia/crudExtia/dao/LibraryDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/extia/crudExtia/dao/LibraryDaoImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/extia/crudExtia/dao/ItemDao.java" />
         <option value="$PROJECT_DIR$/src/main/resources/db/sql/user.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/extia/crudExtia/models/User.java" />
@@ -193,6 +204,9 @@
         <option value="$PROJECT_DIR$/src/test/resources/db.sql/user.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/extia/crudExtia/dao/ItemDaoImpl.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/extia/crudExtia/dao/ItemDaoImplTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/extia/crudExtia/dao/LibraryDaoImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/extia/crudExtia/dao/LibraryDao.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/extia/crudExtia/dao/LibraryDaoImplTest.java" />
       </list>
     </option>
   </component>
@@ -427,6 +441,15 @@
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="crudExtia" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="crudExtia" type="b2602c69:ProjectViewProjectNode" />
+              <item name="crudExtia" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="crudExtia" type="462c0819:PsiDirectoryNode" />
               <item name="services" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -519,7 +542,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Mvn.ItemDaoImplTest">
+  <component name="RunManager" selected="Mvn.LibraryDaoImplTest">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -625,7 +648,7 @@
       <option name="PROGRAM_PARAMETERS" />
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
-    <configuration name="ItemDaoImplTest" type="mvnRunConfigurationType" factoryName="Mvn" temporary="true" runType="run_test">
+    <configuration name="LibraryDaoImplTest" type="mvnRunConfigurationType" factoryName="Mvn" temporary="true" runType="run_test">
       <MavenSettings>
         <option name="myGeneralSettings" />
         <option name="myRunnerSettings" />
@@ -638,7 +661,7 @@
               <list>
                 <option value="test-compile" />
                 <option value="surefire:test" />
-                <option value="-Dtest=com.extia.crudExtia.dao.ItemDaoImplTest" />
+                <option value="-Dtest=com.extia.crudExtia.dao.LibraryDaoImplTest" />
                 <option value="-DforkCount=12" />
               </list>
             </option>
@@ -651,7 +674,7 @@
         </option>
       </MavenSettings>
     </configuration>
-    <configuration name="ItemDaoImplTest.createItem" type="mvnRunConfigurationType" factoryName="Mvn" temporary="true" runType="run_test">
+    <configuration name="LibraryDaoImplTest.createLibrary" type="mvnRunConfigurationType" factoryName="Mvn" temporary="true" runType="run_test">
       <MavenSettings>
         <option name="myGeneralSettings" />
         <option name="myRunnerSettings" />
@@ -664,7 +687,7 @@
               <list>
                 <option value="test-compile" />
                 <option value="surefire:test" />
-                <option value="-Dtest=com.extia.crudExtia.dao.ItemDaoImplTest#createItem" />
+                <option value="-Dtest=com.extia.crudExtia.dao.LibraryDaoImplTest#createLibrary" />
               </list>
             </option>
             <option name="profilesMap">
@@ -676,7 +699,7 @@
         </option>
       </MavenSettings>
     </configuration>
-    <configuration name="ItemDaoImplTest.deleteItem" type="mvnRunConfigurationType" factoryName="Mvn" temporary="true" runType="run_test">
+    <configuration name="LibraryDaoImplTest.deleteLibrary" type="mvnRunConfigurationType" factoryName="Mvn" temporary="true" runType="run_test">
       <MavenSettings>
         <option name="myGeneralSettings" />
         <option name="myRunnerSettings" />
@@ -689,7 +712,7 @@
               <list>
                 <option value="test-compile" />
                 <option value="surefire:test" />
-                <option value="-Dtest=com.extia.crudExtia.dao.ItemDaoImplTest#deleteItem" />
+                <option value="-Dtest=com.extia.crudExtia.dao.LibraryDaoImplTest#deleteLibrary" />
               </list>
             </option>
             <option name="profilesMap">
@@ -701,7 +724,7 @@
         </option>
       </MavenSettings>
     </configuration>
-    <configuration name="ItemDaoImplTest.searchItem" type="mvnRunConfigurationType" factoryName="Mvn" temporary="true" runType="run_test">
+    <configuration name="LibraryDaoImplTest.getLibraryByUsers" type="mvnRunConfigurationType" factoryName="Mvn" temporary="true" runType="run_test">
       <MavenSettings>
         <option name="myGeneralSettings" />
         <option name="myRunnerSettings" />
@@ -714,7 +737,7 @@
               <list>
                 <option value="test-compile" />
                 <option value="surefire:test" />
-                <option value="-Dtest=com.extia.crudExtia.dao.ItemDaoImplTest#searchItem" />
+                <option value="-Dtest=com.extia.crudExtia.dao.LibraryDaoImplTest#getLibraryByUsers" />
               </list>
             </option>
             <option name="profilesMap">
@@ -726,7 +749,7 @@
         </option>
       </MavenSettings>
     </configuration>
-    <configuration name="ItemDaoImplTest.updateItem" type="mvnRunConfigurationType" factoryName="Mvn" temporary="true" runType="run_test">
+    <configuration name="LibraryDaoImplTest.updateLibrary" type="mvnRunConfigurationType" factoryName="Mvn" temporary="true" runType="run_test">
       <MavenSettings>
         <option name="myGeneralSettings" />
         <option name="myRunnerSettings" />
@@ -739,7 +762,7 @@
               <list>
                 <option value="test-compile" />
                 <option value="surefire:test" />
-                <option value="-Dtest=com.extia.crudExtia.dao.ItemDaoImplTest#updateItem" />
+                <option value="-Dtest=com.extia.crudExtia.dao.LibraryDaoImplTest#updateLibrary" />
               </list>
             </option>
             <option name="profilesMap">
@@ -753,19 +776,19 @@
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Maven.debug" />
-      <item index="1" class="java.lang.String" itemvalue="Mvn.ItemDaoImplTest" />
-      <item index="2" class="java.lang.String" itemvalue="Mvn.ItemDaoImplTest.createItem" />
-      <item index="3" class="java.lang.String" itemvalue="Mvn.ItemDaoImplTest.updateItem" />
-      <item index="4" class="java.lang.String" itemvalue="Mvn.ItemDaoImplTest.deleteItem" />
-      <item index="5" class="java.lang.String" itemvalue="Mvn.ItemDaoImplTest.searchItem" />
+      <item index="1" class="java.lang.String" itemvalue="Mvn.LibraryDaoImplTest.getLibraryByUsers" />
+      <item index="2" class="java.lang.String" itemvalue="Mvn.LibraryDaoImplTest.createLibrary" />
+      <item index="3" class="java.lang.String" itemvalue="Mvn.LibraryDaoImplTest.updateLibrary" />
+      <item index="4" class="java.lang.String" itemvalue="Mvn.LibraryDaoImplTest.deleteLibrary" />
+      <item index="5" class="java.lang.String" itemvalue="Mvn.LibraryDaoImplTest" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Mvn.ItemDaoImplTest" />
-        <item index="1" class="java.lang.String" itemvalue="Mvn.ItemDaoImplTest.searchItem" />
-        <item index="2" class="java.lang.String" itemvalue="Mvn.ItemDaoImplTest.deleteItem" />
-        <item index="3" class="java.lang.String" itemvalue="Mvn.ItemDaoImplTest.updateItem" />
-        <item index="4" class="java.lang.String" itemvalue="Mvn.ItemDaoImplTest.createItem" />
+        <item index="0" class="java.lang.String" itemvalue="Mvn.LibraryDaoImplTest" />
+        <item index="1" class="java.lang.String" itemvalue="Mvn.LibraryDaoImplTest.deleteLibrary" />
+        <item index="2" class="java.lang.String" itemvalue="Mvn.LibraryDaoImplTest.updateLibrary" />
+        <item index="3" class="java.lang.String" itemvalue="Mvn.LibraryDaoImplTest.createLibrary" />
+        <item index="4" class="java.lang.String" itemvalue="Mvn.LibraryDaoImplTest.getLibraryByUsers" />
       </list>
     </recent_temporary>
   </component>
@@ -937,7 +960,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593878608230</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="items DAO test done">
+      <created>1593881197328</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1593881197328</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -953,28 +983,29 @@
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32887402" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.67112595" sideWeight="0.5042644" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13006397" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" show_stripe_button="true" weight="0.51282054" sideWeight="0.49573562" order="13" side_tool="false" content_ui="tabs" x="132" y="177" width="1315" height="697" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34336677" sideWeight="0.4978678" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2831661" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17004265" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Project Explorer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27025586" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Job Explorer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39910814" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32887402" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" show_stripe_button="true" weight="0.51282054" sideWeight="0.49573562" order="13" side_tool="false" content_ui="tabs" x="132" y="177" width="1315" height="697" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34336677" sideWeight="0.4978678" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2831661" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17004265" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32887402" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -983,7 +1014,6 @@
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30211818" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32887402" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1083,7 +1113,8 @@
     <MESSAGE value="test services library items" />
     <MESSAGE value="controller Items test done" />
     <MESSAGE value="controller libraries users test done" />
-    <option name="LAST_COMMIT_MESSAGE" value="controller libraries users test done" />
+    <MESSAGE value="items DAO test done" />
+    <option name="LAST_COMMIT_MESSAGE" value="items DAO test done" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1154,7 +1185,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/extia/crudExtia/exceptions/CustomException.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/extia/crudExtia/models/ErrorJson.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/extia/crudExtia/utils/Utils.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/extia/crudExtia/CrudExtiaApplication.java">
@@ -1301,24 +1331,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/extia/crudExtia/services/LibraryServiceTests.java" />
     <entry file="file://$PROJECT_DIR$/src/test/java/com/extia/crudExtia/services/LibraryServiceTestd.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/extia/crudExtia/dao/LibraryDaoImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="155" column="16" lean-forward="false" selection-start-line="155" selection-start-column="16" selection-end-line="155" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/extia/crudExtia/services/UserService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="25" column="20" lean-forward="false" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/extia/crudExtia/dao/LibraryDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="22" column="12" lean-forward="false" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -1443,14 +1459,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/extia/crudExtia/controller/LibraryControllerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="100" column="40" lean-forward="false" selection-start-line="100" selection-start-column="34" selection-end-line="100" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/resources/db/migration/V1.0.0__init_database.sql">
       <provider editor-type-id="OdpsQlGraph">
         <state />
@@ -1509,19 +1517,51 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="OdpsQlEditor">
+        <state relative-caret-position="493">
+          <caret line="110" column="87" lean-forward="false" selection-start-line="110" selection-start-column="77" selection-end-line="110" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/extia/crudExtia/dao/LibraryDao.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
-          <caret line="212" column="105" lean-forward="false" selection-start-line="212" selection-start-column="95" selection-end-line="212" selection-end-column="105" />
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/extia/crudExtia/controller/LibraryControllerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="57" column="3" lean-forward="false" selection-start-line="56" selection-start-column="18" selection-end-line="57" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/extia/crudExtia/dao/LibraryDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="140" column="48" lean-forward="false" selection-start-line="140" selection-start-column="28" selection-end-line="140" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/extia/crudExtia/dao/ItemDaoImplTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="75" column="34" lean-forward="false" selection-start-line="75" selection-start-column="34" selection-end-line="75" selection-end-column="34" />
+        <state relative-caret-position="-1087">
+          <caret line="25" column="6" lean-forward="false" selection-start-line="25" selection-start-column="6" selection-end-line="25" selection-end-column="6" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/extia/crudExtia/dao/LibraryDaoImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="628">
+          <caret line="121" column="35" lean-forward="false" selection-start-line="121" selection-start-column="35" selection-end-line="121" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -28,14 +28,6 @@ class ItemDaoImplTest {
     @Autowired
     ItemDao itemDao;
 
-    @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
-
     @Test
     void getAllItems() {
         List<Item> allItems = itemDao.getAllItems();

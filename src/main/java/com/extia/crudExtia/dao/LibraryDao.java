@@ -16,8 +16,6 @@ public interface LibraryDao {
 
     List<Library> getLibraryByUsers(List<Long> ids);
 
-    List<Library> createLibraries(List<Library> libraries);
-
     Library createLibrary(Library libraryToCreate);
 
     Library updateLibrary(Library libraryToUpdate);
