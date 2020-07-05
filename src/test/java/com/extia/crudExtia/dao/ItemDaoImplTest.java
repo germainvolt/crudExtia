@@ -3,8 +3,6 @@ package com.extia.crudExtia.dao;
 import com.extia.crudExtia.enums.E_TypeItem;
 import com.extia.crudExtia.exceptions.ResourceNotFoundException;
 import com.extia.crudExtia.models.Item;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -38,17 +37,11 @@ class ItemDaoImplTest {
 
     @Test
     void getItem() throws ResourceNotFoundException {
-        Item item = itemDao.getItem(1L);
+        Optional<Item> item1 = itemDao.getItem(1L);
+        assertTrue(item1.isPresent());
+        Item item = item1.get();
         assertNotNull(item);
         assertEquals(1L,item.getItemId());
-    }
-    @Test
-    void errorGetItem() {
-        try {
-           itemDao.getItem(-1L);
-        } catch (Exception e) {
-            assertTrue(e instanceof ResourceNotFoundException);
-        }
     }
 
     @Test
@@ -114,7 +107,9 @@ class ItemDaoImplTest {
         Item item = Item.builder().itemId(1L).name("name").libraryId(5L)
                 .type(E_TypeItem.MANGA.getValue()).author("Leiji Matsumoto").build();
         itemDao.updateItem(item);
-        Item itemUpdated = itemDao.getItem(1L);
+        Optional<Item> optionalItem = itemDao.getItem(1L);
+        assertTrue(optionalItem.isPresent());
+        Item itemUpdated = optionalItem.get();
         assertNotNull(itemUpdated);
         assertEquals(item.getItemId(),itemUpdated.getItemId());
         assertEquals(item.getName(),itemUpdated.getName());
@@ -124,11 +119,8 @@ class ItemDaoImplTest {
     @Test
     void deleteItem() {
         itemDao.deleteItem(1L);
-        try {
-            itemDao.getItem(1L);
-        } catch (Exception e) {
-            assertTrue(e instanceof ResourceNotFoundException);
-        }
+//        Optional<Item> optionalItem = itemDao.getItem(1L);
+     //   optionalItem.isPresent();
 
     }
 }
