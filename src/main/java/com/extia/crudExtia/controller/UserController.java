@@ -75,7 +75,7 @@ public class UserController {
         if(id!=userToUpdate.getId()){
             throw new Exception("Ids doesn't match");
         }
-        return userService.UpdateUsers(userToUpdate);
+        return userService.updateUsers(userToUpdate);
     }
     @ApiOperation
             (value = "Create users",
@@ -114,6 +114,6 @@ public class UserController {
         if(id==null){
             throw new Exception("Id can't be null");
         }
-        return libraryService.getMapLibrariesByUserId(id);
+        return libraryService.getLibrariesByUserId(id);
     }
 }

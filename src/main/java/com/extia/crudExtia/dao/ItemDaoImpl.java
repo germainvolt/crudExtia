@@ -85,12 +85,13 @@ public class ItemDaoImpl implements ItemDao {
     }
 
     @Override
-    public Item getItem(Long id) {
+    public Item getItem(Long id) throws ResourceNotFoundException {
         StringBuilder query = new StringBuilder(requestFindItem).append(" ").append(whereId);
         List<Item> items = jdbcTemplate.query(query.toString(),
                             ImmutableMap.of(ITEM_ID, id), getItemRowMapper());
         if(CollectionUtils.isEmpty(items)){
-            return null;
+            log.error("Items not found",id);
+            throw new ResourceNotFoundException("Items not found");
         }
         return items.get(0);
     }
@@ -98,7 +99,7 @@ public class ItemDaoImpl implements ItemDao {
     @Override
     public List<Item> searchItem(Item search) {
         StringBuilder query  = new StringBuilder(requestFindItem);
-        HashMap<String, Object> params = newHashMap();newHashMap();
+        HashMap<String, Object> params = new HashMap();
 
         if(search.getItemId()!=null){
             query.append(" ").append(whereId);
@@ -121,7 +122,7 @@ public class ItemDaoImpl implements ItemDao {
             params.put(NAME_ITEM,search.getName());
         }
         if(StringUtils.isNotBlank(search.getAuthor())){
-            if(search.getName().contains("%")) {
+            if(search.getAuthor().contains("%")) {
                 query.append(" ").append(whereLikeAuthor);
             }else{
                 query.append(" ").append(whereAuthor);

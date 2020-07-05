@@ -76,12 +76,7 @@ public class ItemService {
     }
 
     public Item checkAndUpdateItem(Item itemToEdit) throws ResourceNotFoundException {
-        Item item = itemDao.getItem(itemToEdit.getItemId());
-
-        if(item==null){
-            log.error("Items not found",itemToEdit);
-            throw new ResourceNotFoundException("Items not found");
-        }
+        itemDao.getItem(itemToEdit.getItemId());
 
         return updateItem(itemToEdit);
     }

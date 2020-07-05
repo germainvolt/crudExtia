@@ -88,8 +88,6 @@ public class UserDaoImpl implements UserDao {
                 query.append(" ").append(whereName);
                 params.put(NAME_USER,search.getName());
             }
-
-
         }
         if(StringUtils.isNotBlank(search.getLastname())){
             if(search.getLastname().contains("%")){
@@ -101,12 +99,17 @@ public class UserDaoImpl implements UserDao {
             }
 
         }
+        if(search.getId()!=null){
+            query.append(" ").append(whereId);
+            params.put(ID_USER,search.getId());
+        }
+
+
         List<User> users =jdbcTemplate.query(query.toString(), params,getUserRowMapper());
         if(CollectionUtils.isEmpty(users)){
             log.error("user not found",query.toString(),params);
             throw new ResourceNotFoundException("user not found");
         }
-        log.error("user found",query.toString(),params);
         return users;
     }
 
