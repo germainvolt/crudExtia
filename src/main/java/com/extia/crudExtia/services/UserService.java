@@ -77,11 +77,14 @@ public class UserService {
         return createdUser;
     }
 
-    public void deleteUser(Long id) throws ResourceNotFoundException {
-        User userToDelete=  getUser(id);
-        userToDelete.getLibraries().forEach(library -> libraryService.deleteLibrary(library));
-        userToDelete.setLibraries(null);
-        userDao.deleteUser(id);
+    public void deleteUser(Long id) {
+        try {
+            User userToDelete= getUser(id);
+            userToDelete.getLibraries().forEach(library -> libraryService.deleteLibrary(library));
+            userDao.deleteUser(id);
+        } catch (ResourceNotFoundException e) {
+            e.printStackTrace();
+        }
 
     }
 }

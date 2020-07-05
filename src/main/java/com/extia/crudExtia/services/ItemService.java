@@ -94,8 +94,7 @@ public class ItemService {
         return itemDao.updateItem(itemToEdit);
     }
 
-    public void deleteItem(Long id) throws ResourceNotFoundException {
-        getItem(id);
+    public void deleteItem(Long id) {
         itemDao.deleteItem(id);
     }
 

@@ -119,9 +119,13 @@ public class LibraryService {
         return libraryToUpdate;
     }
 
-    public void deleteLibrary(Long id) throws ResourceNotFoundException {
-        Library libraryToDelete = getLibrary(id);
-        deleteLibrary(libraryToDelete);
+    public void deleteLibrary(Long id){
+        try {
+            Library library = getLibrary(id);
+            deleteLibrary(library);
+        } catch (ResourceNotFoundException e) {
+            e.printStackTrace();
+        }
 
     }
 
