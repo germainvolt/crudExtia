@@ -21,6 +21,7 @@ import org.springframework.util.CollectionUtils;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 
 import static com.google.common.collect.Maps.newHashMap;
@@ -85,15 +86,12 @@ public class ItemDaoImpl implements ItemDao {
     }
 
     @Override
-    public Item getItem(Long id) throws ResourceNotFoundException {
+    public Optional<Item> getItem(Long id) {
         StringBuilder query = new StringBuilder(requestFindItem).append(" ").append(whereId);
-        List<Item> items = jdbcTemplate.query(query.toString(),
+        Item item = jdbcTemplate.queryForObject(query.toString(),
                             ImmutableMap.of(ITEM_ID, id), getItemRowMapper());
-        if(CollectionUtils.isEmpty(items)){
-            log.error("Items not found",id);
-            throw new ResourceNotFoundException("Items not found");
-        }
-        return items.get(0);
+
+        return Optional.ofNullable(item);
     }
 
     @Override

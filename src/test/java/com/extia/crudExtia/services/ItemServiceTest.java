@@ -14,6 +14,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,12 +35,12 @@ class ItemServiceTest {
 
 
     @BeforeEach
-    void setUp() throws ResourceNotFoundException {
+    void setUp() {
         itemDao = mock(ItemDao.class);
         itemService = new ItemService();
         MockitoAnnotations.initMocks( this );
         item = Item.builder().itemId(6L).libraryId(5L).build();
-        when(itemDao.getItem(6L)).thenReturn(item);
+        when(itemDao.getItem(6L)).thenReturn(Optional.ofNullable(item));
         items.add(item);
     }
 
@@ -116,6 +117,15 @@ class ItemServiceTest {
     }
 
     @Test
-    void deleteItem() {
+    void deleteItemId() throws ResourceNotFoundException {
+
+        itemService.deleteItem(item.getItemId());
+        verify(itemDao,times(1)).deleteItem(item.getItemId());
+    }
+    @Test
+    void deleteItem() throws ResourceNotFoundException {
+
+        itemService.deleteItem(item);
+        verify(itemDao,times(1)).deleteItem(item.getItemId());
     }
 }
