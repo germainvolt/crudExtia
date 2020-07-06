@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,18 +36,17 @@ class LibraryDaoImplTest {
 
     @Test
     void getLibrary() throws ResourceNotFoundException {
-        Library library = libraryDao.getLibrary(1L);
+        Optional<Library> optionalLibrary = libraryDao.getLibrary(1L);
+        assertTrue(optionalLibrary.isPresent());
+        Library library = optionalLibrary.get();
         assertNotNull(library);
         assertEquals(1L,library.getLibraryId());
     }
 
     @Test
     void dontGetLibrary() {
-        try {
-            libraryDao.getLibrary(1L);
-        } catch (Exception e) {
-            assertTrue(e instanceof ResourceNotFoundException);
-        }
+        Optional<Library> optionalLibrary = libraryDao.getLibrary(-1L);
+        assertFalse(optionalLibrary.isPresent());
     }
 
     @Test
@@ -107,10 +107,12 @@ class LibraryDaoImplTest {
     }
 
     @Test
-    void updateLibrary() throws ResourceNotFoundException {
+    void updateLibrary()  {
         Library library = Library.builder().libraryId(1L).name("Mes Manga").userId(1L).build();
         libraryDao.updateLibrary(library);
-        Library libraryUpdated = libraryDao.getLibrary(1L);
+        Optional<Library> optionalLibrary = libraryDao.getLibrary(-1L);
+        assertFalse(optionalLibrary.isPresent());
+        Library libraryUpdated = optionalLibrary.get();
         assertNotNull(libraryUpdated);
         assertEquals(library.getName(),libraryUpdated.getName());
 
@@ -120,10 +122,8 @@ class LibraryDaoImplTest {
     void deleteLibrary() {
 
         libraryDao.deleteLibrary(1L);
-        try {
-            libraryDao.getLibrary(1L);
-        } catch (Exception e) {
-            assertTrue(e instanceof ResourceNotFoundException);
-        }
+
+        Optional<Library> optionalLibrary = libraryDao.getLibrary(1L);
+        assertFalse(optionalLibrary.isPresent());
     }
 }
