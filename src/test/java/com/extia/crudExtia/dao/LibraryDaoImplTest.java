@@ -110,10 +110,9 @@ class LibraryDaoImplTest {
     void updateLibrary()  {
         Library library = Library.builder().libraryId(1L).name("Mes Manga").userId(1L).build();
         libraryDao.updateLibrary(library);
-        Optional<Library> optionalLibrary = libraryDao.getLibrary(-1L);
-        assertFalse(optionalLibrary.isPresent());
+        Optional<Library> optionalLibrary = libraryDao.getLibrary(1L);
+        assertTrue(optionalLibrary.isPresent());
         Library libraryUpdated = optionalLibrary.get();
-        assertNotNull(libraryUpdated);
         assertEquals(library.getName(),libraryUpdated.getName());
 
     }
