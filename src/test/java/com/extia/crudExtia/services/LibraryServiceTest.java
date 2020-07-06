@@ -15,10 +15,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyList;
@@ -43,7 +40,7 @@ class LibraryServiceTest {
     private User user;
 
     @BeforeEach
-    public void init() throws ResourceNotFoundException {
+    public void init(){
         libraryDao = mock(LibraryDaoImpl.class);
         itemService = mock(ItemService.class);
         libraryService = new LibraryService();
@@ -60,7 +57,7 @@ class LibraryServiceTest {
         itemsMap.put(5L,items);
 
         when(libraryDao.getLibraryByUsers(anyList())).thenReturn(newArrayList(libraries));
-        when(libraryDao.getLibrary(5L)).thenReturn(lib);
+        when(libraryDao.getLibrary(5L)).thenReturn(Optional.ofNullable(lib));
         when(itemService.getItemByLibraries(anyList())).thenReturn(itemsMap);
         when(itemService.getItemsByLibrary(anyLong())).thenReturn(items);
 
@@ -80,22 +77,22 @@ class LibraryServiceTest {
 
     @Test
     public void shouldGetLibraryById() throws ResourceNotFoundException {
-        when(libraryDao.getLibrary(5L)).thenReturn(lib);
+        when(libraryDao.getLibrary(5L)).thenReturn(Optional.ofNullable(lib));
         Library res = libraryService.getLibrary(5L);
 
         assertNotNull(res);
         assertEquals(5L,res.getLibraryId());
     }
     @Test
-    public void shouldThrowResourceNotFoundException() throws ResourceNotFoundException {
-        when(libraryDao.getLibrary(1L)).thenThrow(ResourceNotFoundException.class);
+    public void shouldThrowResourceNotFoundException() {
+        when(libraryDao.getLibrary(1L)).thenReturn(Optional.empty());
 
         try {
             libraryService.getLibrary(1L);
         } catch (Exception e) {
             assertTrue(e instanceof ResourceNotFoundException);
         }
- ;
+
     }
 
     @Test
@@ -170,7 +167,6 @@ class LibraryServiceTest {
 
     @Test
     void updateLibrary() throws ResourceNotFoundException {
-        when(libraryDao.getLibrary(5L)).thenReturn(lib);
         when(itemService.updateOrCreateItems(anyList())).thenReturn(newArrayList(item));
         when(libraryDao.updateLibrary(lib)).thenReturn(lib);
         Library library = libraryService.updateLibrary(lib);
@@ -179,9 +175,8 @@ class LibraryServiceTest {
     }
 
     @Test
-    void deleteLibrary() throws ResourceNotFoundException {
+    void deleteLibrary()  {
 
-        when(libraryDao.getLibrary(5L)).thenReturn(lib);
         when(itemService.getItemsByLibrary(5L)).thenReturn(newArrayList(item));
         libraryService.deleteLibrary(5L);
         verify(libraryDao,times(1)).deleteLibrary(5L);

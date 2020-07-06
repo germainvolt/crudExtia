@@ -10,6 +10,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -31,7 +32,11 @@ public class UserService {
 
     public User getUser(Long id) throws ResourceNotFoundException {
 
-        User user = userDao.getUser(id);
+        Optional<User> optionalUser = userDao.getUser(id);
+        if(!optionalUser.isPresent()){
+            throw new ResourceNotFoundException("user not found");
+        }
+        User user = optionalUser.get();
         List<Library> libraries =libraryService.getLibrariesByUserId(id);
         user.setLibraries(libraries);
         return user;
@@ -52,7 +57,6 @@ public class UserService {
     }
 
     public User updateUsers(User userToUpdate) throws ResourceNotFoundException {
-        Long userId = userToUpdate.getId();
         List<Library> libraries = getUser(userToUpdate.getId()).getLibraries();
         if(!CollectionUtils.isEmpty(libraries)) {
             List<Long> ids = userToUpdate.getLibraries().stream().map(Library::getLibraryId).collect(Collectors.toList());

@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -18,6 +19,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 import static com.google.common.collect.Maps.newHashMap;
 
@@ -60,18 +62,15 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUser(Long id) throws ResourceNotFoundException {
+    public Optional<User> getUser(Long id) {
         StringBuilder query = new StringBuilder(requestFindUser).append(" ").append(whereId);
-
-        List<User> users =jdbcTemplate.query(query.toString(), ImmutableMap.of(ID_USER, id),getUserRowMapper());
-
-        if(CollectionUtils.isEmpty(users)){
-            log.error("user not found",query.toString(),id);
-            throw new ResourceNotFoundException("user not found");
+        try {
+            User user = jdbcTemplate.queryForObject(query.toString(), ImmutableMap.of(ID_USER, id), getUserRowMapper());
+            return Optional.ofNullable(user);
+        }catch (EmptyResultDataAccessException e){
+            log.error(e.getMessage());
+            return Optional.empty();
         }
-        log.error("user found",query.toString(),id);
-        System.out.println(id+ " user found "+query.toString() +"\n"+users.get(0));
-        return users.get(0);
     }
 
     @Override

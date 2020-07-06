@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -33,7 +30,12 @@ public class LibraryService {
     }
 
     public Library getLibrary(Long id) throws ResourceNotFoundException {
-        Library library = libraryDao.getLibrary(id);
+        Optional<Library> optionalLibrary = libraryDao.getLibrary(id);
+
+        if(!optionalLibrary.isPresent()){
+            throw new ResourceNotFoundException("Library not found");
+        }
+        Library library = optionalLibrary.get();
         library.setItems(itemService.getItemsByLibrary(library.getLibraryId()));
         return library;
 

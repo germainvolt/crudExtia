@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -60,14 +61,17 @@ public class LibraryDaoImpl implements LibraryDao {
     }
 
     @Override
-    public Library getLibrary(Long id) throws ResourceNotFoundException {
-        StringBuilder query = new StringBuilder(requestFindLibrary).append(" ").append(whereId);
-        List<Library> libraries = jdbcTemplate.query(query.toString(),ImmutableMap.of(ID_LIBRARY, id),getLibraryRowMapper());
-        if(CollectionUtils.isEmpty(libraries)){
-            log.error("Library not found",query.toString(),id);
-            throw new ResourceNotFoundException("Library not found");
+    public Optional<Library> getLibrary(Long id) {
+        try{
+            StringBuilder query = new StringBuilder(requestFindLibrary).append(" ").append(whereId);
+            Library library = jdbcTemplate.queryForObject(query.toString(),ImmutableMap.of(ID_LIBRARY, id),getLibraryRowMapper());
+
+            return Optional.ofNullable(library);
+
+        }catch (EmptyResultDataAccessException e){
+            log.error(e.getMessage());
+            return Optional.empty();
         }
-        return libraries.get(0);
     }
 
     @Override

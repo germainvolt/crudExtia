@@ -5,7 +5,7 @@
   <a href="http://localhost:8080/swagger-ui.html#/" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
-  <a href="https://github.com/kefranabg/readme-md-generator/graphs/commit-activity" target="_blank">
+  <a href="https://github.com/germainvolt/crudExtia/graphs/commit-activity" target="_blank">
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
   </a>
   <a href="https://github.com/kefranabg/readme-md-generator/blob/master/LICENSE" target="_blank">
@@ -18,6 +18,8 @@
 ### 🏠 [Homepage](https://github.com/germainvolt/crudExtia#readme)
 
 ### ✨ [Demo](http://127.0.0.1:8080/)
+
+### ☼ [Swagger](http://localhost:8080/swagger-ui.html#/)
 
 ## Install
 
