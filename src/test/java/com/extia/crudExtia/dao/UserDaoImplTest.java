@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -33,18 +34,17 @@ class UserDaoImplTest {
     }
 
     @Test
-    void getUser() throws ResourceNotFoundException {
+    void getUser(){
 
-        User user = userDao.getUser(1L);
-        assertNotNull(user);
-        assertEquals(1L,user.getId());
+        Optional<User> optionalUser = userDao.getUser(1L);
+        assertTrue(optionalUser.isPresent());
+        assertNotNull(optionalUser.get());
+        assertEquals(1L,optionalUser.get().getId());
 
-        try {
-            userDao.getUser(-11L);
-        } catch (Exception e) {
-            assertTrue(e instanceof ResourceNotFoundException);
+        optionalUser = userDao.getUser(-11L);
+        assertFalse(optionalUser.isPresent());
+
         }
-    }
 
     @Test
     void findUsers() throws ResourceNotFoundException {
@@ -96,23 +96,20 @@ class UserDaoImplTest {
     }
 
     @Test
-    void updateUser() throws ResourceNotFoundException {
+    void updateUser() {
         User user =User.builder().id(3L).name("Kamilah").lastname("Burden").build();
-        User before = userDao.getUser(user.getId());
-        assertNotEquals(user.getLastname(),before.getLastname());
+        Optional<User> optionalBefore = userDao.getUser(user.getId());
+        assertNotEquals(user.getLastname(), optionalBefore.get().getLastname());
         userDao.updateUser(user);
-        User after = userDao.getUser(user.getId());
+        Optional<User> optionalUser = userDao.getUser(user.getId());
+        User after = optionalUser.get();
         assertEquals(user.getLastname(),after.getLastname());
     }
 
     @Test
-    void deleteUser() throws ResourceNotFoundException {
-        assertNotNull(userDao.getUser(11L));
+    void deleteUser() {
+        assertTrue(userDao.getUser(11L).isPresent());
         userDao.deleteUser(11L);
-        try {
-            userDao.getUser(11L);
-        } catch (Exception e) {
-            assertTrue(e instanceof ResourceNotFoundException);
-        }
+        assertFalse( userDao.getUser(11L).isPresent());
     }
 }

@@ -36,7 +36,7 @@ class ItemDaoImplTest {
     }
 
     @Test
-    void getItem() throws ResourceNotFoundException {
+    void getItem() {
         Optional<Item> item1 = itemDao.getItem(1L);
         assertTrue(item1.isPresent());
         Item item = item1.get();
@@ -103,7 +103,7 @@ class ItemDaoImplTest {
     }
 
     @Test
-    void updateItem() throws ResourceNotFoundException {
+    void updateItem() {
         Item item = Item.builder().itemId(1L).name("name").libraryId(5L)
                 .type(E_TypeItem.MANGA.getValue()).author("Leiji Matsumoto").build();
         itemDao.updateItem(item);
@@ -119,8 +119,7 @@ class ItemDaoImplTest {
     @Test
     void deleteItem() {
         itemDao.deleteItem(1L);
-//        Optional<Item> optionalItem = itemDao.getItem(1L);
-     //   optionalItem.isPresent();
+        assertFalse(itemDao.getItem(1L).isPresent());
 
     }
 }

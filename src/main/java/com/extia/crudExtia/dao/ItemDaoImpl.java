@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -71,6 +72,7 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public List<Item> getAllItems() {
+
         List<Item> items = jdbcTemplate.query(requestFindItem, getItemRowMapper());
 
         return items;
@@ -87,11 +89,17 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public Optional<Item> getItem(Long id) {
-        StringBuilder query = new StringBuilder(requestFindItem).append(" ").append(whereId);
-        Item item = jdbcTemplate.queryForObject(query.toString(),
-                            ImmutableMap.of(ITEM_ID, id), getItemRowMapper());
+        try {
+            StringBuilder query = new StringBuilder(requestFindItem).append(" ").append(whereId);
+            Item item = jdbcTemplate.queryForObject(query.toString(),
+                    ImmutableMap.of(ITEM_ID, id), getItemRowMapper());
 
-        return Optional.ofNullable(item);
+            return Optional.ofNullable(item);
+
+        }catch (EmptyResultDataAccessException e){
+            log.error(e.getMessage());
+            return Optional.empty();
+        }
     }
 
     @Override

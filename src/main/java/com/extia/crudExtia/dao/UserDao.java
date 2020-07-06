@@ -4,11 +4,12 @@ import com.extia.crudExtia.exceptions.ResourceNotFoundException;
 import com.extia.crudExtia.models.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserDao {
     List<User> getAllUsers();
 
-    User getUser(Long id) throws ResourceNotFoundException;
+    Optional<User> getUser(Long id) throws ResourceNotFoundException;
 
     List<User> findUsers(User search) throws ResourceNotFoundException;
 

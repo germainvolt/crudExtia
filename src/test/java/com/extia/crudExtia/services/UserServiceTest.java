@@ -15,6 +15,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -75,7 +76,7 @@ class UserServiceTest {
     void shouldGetUser() throws ResourceNotFoundException {
 
         when(libraryService.getLibrariesByUserId(1L)).thenReturn(libraries);
-        when(userDao.getUser(1L)).thenReturn(user);
+        when(userDao.getUser(1L)).thenReturn(Optional.ofNullable(user));
 
 
         User userTest = userService.getUser(1L);
@@ -110,7 +111,7 @@ class UserServiceTest {
         User userUp = User.builder().id(1L).lastname("new lastname").name("new name").build();
         when(userDao.updateUser(any(User.class))).thenReturn(userUp);
         when(libraryService.createOrUpdateLibraries(anyList())).thenReturn(null);
-        when(userDao.getUser(1L)).thenReturn(user);
+        when(userDao.getUser(1L)).thenReturn(Optional.ofNullable(user));
 
         User userTest = userService.updateUsers(userUp);
         assertNotNull(userTest);
@@ -127,7 +128,7 @@ class UserServiceTest {
         when(userDao.updateUser(any(User.class))).thenReturn(user);
         when(libraryService.getLibrariesByUserId(1L)).thenReturn(newArrayList(Library.builder().userId(1L).libraryId(5L).name("library").build()));
         when(libraryService.createOrUpdateLibraries(anyList())).thenReturn(null);
-        when(userDao.getUser(1L)).thenReturn(userUp);
+        when(userDao.getUser(1L)).thenReturn(Optional.ofNullable(userUp));
 
         User userTest = userService.updateUsers(user);
         assertNotNull(userTest);
@@ -167,7 +168,7 @@ class UserServiceTest {
 
     @Test
     void deleteUser() throws ResourceNotFoundException {
-        when(userDao.getUser(1L)).thenReturn(user);
+        when(userDao.getUser(1L)).thenReturn(Optional.ofNullable(user));
         userService.deleteUser(1L);
 
         verify(userDao,times(1)).deleteUser(1L);
